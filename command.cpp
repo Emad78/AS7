@@ -7,36 +7,42 @@ Command::command()
 
 void Command::set()
 {
-	set_person_info();
-	set_film_info();
-	set_search_info();	
+	info.insert({NAME, ""});
+	info.insert({PRICE, ""});
+	info.insert({DIRECTOR, ""});
+	info.insert({MAX_YEAR, ""});
+	info.insert({MIN_YEAR, ""});
+	info.insert({MIN_RATE, ""});
+	info.insert({YEAR, ""});
+	info.insert({LENGTH, ""});
+	info.insert({SUMMARY, ""});
+	info.insert({USERNAME, ""});
+	info.insert({PASSWORD, ""});
+	info.insert({AGE, ""});
+	info.insert({EMAIL, ""});
+	info.insert({PUBLISHER, ""});
 }
 
-viod Command::set_search_info()
+string Command::seprate_word(string &sentence,char delimiter = ' ')
 {
-	search_info.insert({NAME, ""});
-	search_info.insert({PRICE, ""});
-	search_info.insert({DIRECTOR, ""});
-	search_info.insert({MAX_YEAR, ""});
-	search_info.insert({MIN_YEAR, ""});
-	search_info.insert({MIN_RATE, ""});
+	int line_index = sentence.find(delimiter);
+	string word;
+	word=sentence.substr(0,line_index);
+	sentence=sentence.substr(line_index+1,sentence.size()-line_index);
+	if (word == sentence && line_index == -1)
+		sentence="";
+	return word;
 }
 
-void Command::set_film_info()
+void Command::input(string line)
 {
-	film_info.insert({NAME, ""});
-	film_info.insert({YEAR, ""});
-	film_info.insert({LENGTH, ""});
-	film_info.insert({PRICE, ""});
-	film_info.insert({SUMMARY, ""});
-	film_info.insert({DIRECTOR, ""});	
+	set();
+	method = check_method(seprate_word(line));
+	request = check_request(seprate_word(line));
+	seprate_word(line);
+	while(line != "")
+	{
+		info[seprate_word(line)] = seprate_word(line);
+	}
 }
 
-void Command::set_person_info()
-{
-	person_info.insert({USERNAME, ""});
-	person_info.insert({PASSWORD, ""});
-	person_info.insert({AGE, ""});
-	person_info.insert({EMAIL, ""});
-	person_info.insert({PUBLISHER, ""});
-}

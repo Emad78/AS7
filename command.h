@@ -24,16 +24,14 @@
 class Command
 {
 private:
-	map<string,string> person_info;
-	map<string,string> film_info;
-	map<string,string> search_info;	
+	map<string,string> info;
 	int method;
 	int request;
-
-
 public:
 	command();
-	~command();
+	void set();
+	void input(string line);
+	string seprate_word(string &sentence,char delimiter);
 	friend class Person;
 	friend class System;
 	friend class Film;

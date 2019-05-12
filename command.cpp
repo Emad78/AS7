@@ -25,10 +25,14 @@ void Command::set()
 
 string Command::seprate_word(string &sentence,char delimiter = ' ')
 {
-	int line_index = sentence.find(delimiter);
+	int line_index = 0;
 	string word;
-	word=sentence.substr(0,line_index);
-	sentence=sentence.substr(line_index+1,sentence.size()-line_index);
+	while(line_index == 0 && sentence.size() != 0)
+	{
+		line_index = sentence.find(delimiter);
+		word=sentence.substr(0,line_index);
+		sentence=sentence.substr(line_index+1,sentence.size()-line_index);
+	}
 	if (word == sentence && line_index == -1)
 		sentence="";
 	return word;

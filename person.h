@@ -12,7 +12,7 @@ private:
 	int age;
 	bool is_publisher;
 	vector<Film*> bought_films;  // pointer or not
-
+	int money;
 public:
 	person();
 	~person();

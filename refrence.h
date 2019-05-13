@@ -52,6 +52,8 @@
 #define RATE "rate"
 #define PURCHASED "purchased"
 #define NOTIFICATIONS "notifications"
+#define READ "read"
+#define NOTIFICATIONS_READ "notificationsread"
 
 using namespace std;
 

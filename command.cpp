@@ -7,20 +7,27 @@ Command::command()
 
 void Command::set()
 {
-	info.insert({NAME, ""});
-	info.insert({PRICE, ""});
-	info.insert({DIRECTOR, ""});
-	info.insert({MAX_YEAR, ""});
-	info.insert({MIN_YEAR, ""});
-	info.insert({MIN_RATE, ""});
-	info.insert({YEAR, ""});
-	info.insert({LENGTH, ""});
-	info.insert({SUMMARY, ""});
-	info.insert({USERNAME, ""});
-	info.insert({PASSWORD, ""});
-	info.insert({AGE, ""});
-	info.insert({EMAIL, ""});
-	info.insert({PUBLISHER, ""});
+	Input.info.insert({NAME, ""});
+	Input.info.insert({PRICE, ""});
+	Input.info.insert({DIRECTOR, ""});
+	Input.info.insert({MAX_YEAR, ""});
+	Input.info.insert({MIN_YEAR, ""});
+	Input.info.insert({MIN_RATE, ""});
+	Input.info.insert({YEAR, ""});
+	Input.info.insert({LENGTH, ""});
+	Input.info.insert({SUMMARY, ""});
+	Input.info.insert({USERNAME, ""});
+	Input.info.insert({PASSWORD, ""});
+	Input.info.insert({AGE, ""});
+	Input.info.insert({EMAIL, ""});
+	Input.info.insert({PUBLISHER, ""});
+	Input.info.insert({FILM_ID, ""});
+	Input.info.insert({COMENT_ID, ""});
+	Input.info.insert({CONTENT, ""});
+	Input.info.insert({USER_ID, ""});
+	Input.info.insert({AMOUNT, ""});
+	Input.info.insert({SCORE, ""});
+	Input.info.insert({LIMIT, ""});	
 }
 
 string Command::seprate_word(string &sentence,char delimiter = ' ')
@@ -38,15 +45,18 @@ string Command::seprate_word(string &sentence,char delimiter = ' ')
 	return word;
 }
 
-void Command::input(string line)
+Input Command::get_input(string line)
 {
 	set();
-	method = check_method(seprate_word(line));
-	request = check_request(seprate_word(line));
+	Input.method = check_method(seprate_word(line));
+	Input.request = check_request(seprate_word(line));
 	seprate_word(line);
+	string key, value;
 	while(line != "")
 	{
-		info[seprate_word(line)] = seprate_word(line);
+		key = seprate_word(line);
+		value = seprate_word(line);
+		Input.info[key] = value;        //hashing
 	}
 }
 

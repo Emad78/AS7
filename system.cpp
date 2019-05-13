@@ -62,7 +62,39 @@ void System::metod_detect()
 	}
 }
 
-
+void System::post_metod()
+{
+	switch(input.request)
+	{
+		case LOGIN:
+			login();
+			break;
+		case SIGNUP:
+			signup();
+			break;
+		case FILMS:
+			post_films();
+			break;
+		case MONEY:
+			post_money();
+			break;
+		case REPLIES:
+			replies();
+			break;
+		case FOLLOWERS:
+			post_followers();
+			break;
+		case BUY:
+			buy();
+			break;
+		case RATE:
+			rate();
+			break;
+		case COMMENTS:
+			post_comments();
+			break;
+	}
+}
 
 
 

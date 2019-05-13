@@ -112,6 +112,34 @@ void System::put_metod()
 	}
 }
 
+void System::get_metod()
+{
+	switch(input.request)
+	{
+		case FOLLOWERS:
+			get_followers();
+			break;
+		case PUBLISHED:
+			published();
+			break;
+		case FILMS:
+			get_films();
+			break;
+		case PURCHASED:
+			purchased();
+			break;
+		case NOTIFICATIONS:
+			notifications();
+			break;
+		case NOTIFICATIONSREAD:
+			notificationsread();
+			break;
+		default:
+			throw Not_found();
+			break;
+	}
+}
+
 
 
 

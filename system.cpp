@@ -93,10 +93,24 @@ void System::post_metod()
 		case COMMENTS:
 			post_comments();
 			break;
+		default:
+			throw Not_found();
+			break;
 	}
 }
 
-
+void System::put_metod()
+{
+	switch(input.request)
+	{
+		case FILMS:
+			put_films();
+			break;
+		default:
+			throw Not_found();
+			break;
+	}
+}
 
 
 

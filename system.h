@@ -12,7 +12,8 @@ private:
 	vector<Film*> films;
 	vector<Person*> users;
 	int system_money;
-	Command command;
+	Command* command;
+	Person* now_user;
 public:
 	System();
 	~System();

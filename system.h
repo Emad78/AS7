@@ -17,9 +17,11 @@ private:
 	int system_money;
 	Command* command;
 	Person* now_user;
+	Input = input;
 public:
 	System();
 	void run();
+	void process();
 	~System();
 };
 

@@ -5,6 +5,9 @@
 #include "film.h"
 #include "person.h"
 #include "publisher.h"
+#include "bad_request.h"
+#include "not_found.h"
+#include "‫‪permission‬‬_denied‬.h‬"
 
 class System
 {
@@ -16,6 +19,7 @@ private:
 	Person* now_user;
 public:
 	System();
+	void run();
 	~System();
 };
 

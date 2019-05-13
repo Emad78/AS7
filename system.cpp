@@ -140,7 +140,21 @@ void System::get_metod()
 	}
 }
 
-
+void System::delete_metod()
+{
+	switch (input.request)
+	{
+		case FILMS:
+			delete_films();
+			break;
+		case COMMENTS:
+			delete_comments();
+			break;
+		default:
+			throw Not_found();
+			break;
+	}
+}
 
 
 

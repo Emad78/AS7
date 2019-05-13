@@ -22,6 +22,7 @@ public:
 	System();
 	void run();
 	void process();
+	void metod_detect();
 	~System();
 };
 

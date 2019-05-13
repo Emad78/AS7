@@ -34,3 +34,44 @@ void System::run()
 		}
 	}
 }
+
+void System::process()
+{
+	metod_detect();	
+}
+
+void System::metod_detect()
+{
+	switch (input.metod)
+	{
+		case PUT:
+			put_metod();
+			break;
+		case POST:
+			post_metod();
+			break;
+		case GET:
+			get_metod();
+			break;
+		case DELETE:
+			delete_metod();
+			break;
+		default:
+			throw Bad_request();
+			break;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

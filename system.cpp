@@ -4,7 +4,7 @@ System::System()
 {
 	system_money = 0;
 	command = new Command();
-	now_user = NULL;
+	now_user = NULL;	
 }
 
 System::~System()
@@ -15,4 +15,22 @@ System::~System()
 		delete users[i];
 	delete command;
 	delete now_user;
+}
+
+void System::run()
+{
+	string line;
+	while(true)
+	{
+		try
+		{
+			getline(cin, line);
+			input = command.get_input(line);
+			process();
+
+		}catch(exception& ex)
+		{
+			cout<<ex.what()<<endl;
+		}
+	}
 }

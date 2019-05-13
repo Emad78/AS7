@@ -40,6 +40,19 @@
 #define GET "GET"
 #define DELETE "DELETE"
 
+#define SIGNUP "signup"
+#define LOGIN "login"
+#define FILMS "films"
+#define FOLLOWERS "followers"
+#define MONEY "money"
+#define PUBLISHED "published"
+#define REPLIES "replies"
+#define COMMENTS "comments"
+#define BUY "buy"
+#define RATE "rate"
+#define PURCHASED "purchased"
+#define NOTIFICATIONS "notifications"
+
 using namespace std;
 
 struct Input

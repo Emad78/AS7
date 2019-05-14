@@ -123,6 +123,8 @@ void System::post_films()
 	Film* new_film;
 	new_film = new Film(input, films.size() + 1);
 	films.push_back(new_film);
+	now_user->add_my_film(new_film);
+	cout<<OK<<endl;
 }
 
 void System::signup()
@@ -136,6 +138,7 @@ void System::signup()
 		new_user = Person(input, users.size() + 1);
 	users.push_back(new_user);
 	now_user = new_user;
+	cout<<OK<<endl;
 }
 
 void System::login()
@@ -150,6 +153,7 @@ void System::login()
 		throw Bad_request();		
 	}
 	now_user = new_user;
+	cout<<OK<<endl;
 }
 
 void System::put_metod()
@@ -163,6 +167,19 @@ void System::put_metod()
 			throw Not_found();
 			break;
 	}
+}
+
+void System::put_films()
+{
+	if(now_user->get_is_publisher() == false)
+		throw Permission_denied();
+	Film* now_film = now_user->search_my_film(input.info[FILM_ID]); 
+	if(now_film == NULL)
+	{
+		delete now_film;
+		throw Permission_denied();
+	}
+	now_film->edit(input);
 }
 
 void System::get_metod()

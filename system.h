@@ -29,6 +29,7 @@ public:
 	void delete_metod();
 	void signup();
 	void login();
+	void post_films();
 	Person* search_user(string username);
 	~System();
 };

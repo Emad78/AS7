@@ -109,6 +109,22 @@ void System::post_metod()
 			break;
 	}
 }
+
+void System::post_films()
+{
+	if(input.info[NAME] == "" || input.info[YEAR] == ""
+		|| input.info[LENGTH] == "" || input.info[PRICE] == ""
+		|| input.info[SUMMARY] == "" || input.info[DIRECTORY] == "")
+		throw Bad_request();
+	if(now_user == NULL)
+		throw Permission_denied();
+	if(now_user->get_is_publisher() == false)
+		throw Permission_denied();			
+	Film* new_film;
+	new_film = new Film(input, films.size() + 1);
+	films.push_back(new_film);
+}
+
 void System::signup()
 {
 	Person* new_user;

@@ -1,8 +1,9 @@
 #include "command.h"
 
-Command::command()
+Command::command(string _line)
 {
 	set();
+	line = _line;
 }
 
 void Command::set()
@@ -45,7 +46,7 @@ string Command::seprate_word(string &sentence,char delimiter = ' ')
 	return word;
 }
 
-Input Command::get_input(string line)
+Input Command::get_input()
 {
 	set();
 	input.method = seprate_word(line);

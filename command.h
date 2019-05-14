@@ -2,11 +2,15 @@
 #define COMMAND_H
 
 #include "refrence.h"
+#include "bad_request.h"
+#include "not_found.h"
+#include "‫‪permission‬‬_denied‬.h‬"
 
 class Command
 {
 private:
 	Input input;
+	string line;
 public:
 	command();
 	void set();

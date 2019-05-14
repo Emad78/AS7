@@ -17,3 +17,8 @@ void Person::get_username()
 {
 	return username;
 }
+
+void Person::get_password()
+{
+	return password;
+}

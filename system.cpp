@@ -4,6 +4,7 @@ System::System()
 {
 	system_money = 0;
 	command = new Command();
+	users.clear();
 	now_user = NULL;	
 }
 
@@ -97,6 +98,15 @@ void System::post_metod()
 			throw Not_found();
 			break;
 	}
+}
+void System::signup()
+{
+	Person* new_user;
+	if(input.info[PUBLISHER] == "true")
+		new_user = Publisher(input, users.size() + 1);
+	else
+		new_user = Person(input, users.size() + 1);
+	users.push_back(new_user);
 }
 
 void System::put_metod()

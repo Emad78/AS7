@@ -27,6 +27,7 @@ public:
 	void post_metod();
 	void get_metod();
 	void delete_metod();
+	void signup();
 	~System();
 };
 

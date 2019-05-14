@@ -26,8 +26,10 @@ void System::run()
 		try
 		{
 			getline(cin, line);
-			input = command.get_input(line);
+			command = new Command(line);
+			input = command.get_input();
 			process();
+			delete command;
 
 		}catch(exception& ex)
 		{
@@ -39,6 +41,14 @@ void System::run()
 void System::process()
 {
 	metod_detect();	
+}
+
+void System::search_user(string username)
+{
+	for(int i = 0; i < users.size(); i++)
+		if(username == users[i]->get_username())
+			return users[i];
+	return NULL;
 }
 
 void System::metod_detect()
@@ -102,6 +112,8 @@ void System::post_metod()
 void System::signup()
 {
 	Person* new_user;
+	if(search_user(input.info[USERNAME] != NULL))
+		throw Bad_request();
 	if(input.info[PUBLISHER] == "true")
 		new_user = Publisher(input, users.size() + 1);
 	else

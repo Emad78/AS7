@@ -28,6 +28,7 @@ public:
 	void get_metod();
 	void delete_metod();
 	void signup();
+	Person* search_user(string username);
 	~System();
 };
 

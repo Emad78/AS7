@@ -55,6 +55,8 @@
 #define READ "read"
 #define NOTIFICATIONS_READ "notificationsread"
 
+#define OK "ok"
+
 using namespace std;
 
 struct Input

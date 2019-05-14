@@ -16,6 +16,7 @@ private:
 public:
 	Film(Input input, int _id);
 	void edit(Input input);
+	int get_id();
 	~Film();
 	
 };

@@ -30,3 +30,8 @@ void Film::edit(Input input)
 	if(year == 0 || length == 0)
 		throw Bad_request();	
 }
+
+int Film::get_id()
+{
+	return id;
+}

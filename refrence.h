@@ -71,4 +71,10 @@ struct Info
 	bool is_publisher;
 };
 
+struct Rate
+{
+	vector<double> score;
+	vector<int> user_id;
+};
+
 #endif

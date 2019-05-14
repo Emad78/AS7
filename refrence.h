@@ -64,4 +64,11 @@ struct Input
 	int request;
 };
 
+struct Info
+{
+	string username, email, password;
+	int age;
+	bool is_publisher;
+};
+
 #endif

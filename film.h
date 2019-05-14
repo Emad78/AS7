@@ -2,15 +2,18 @@
 #define FILM_H
 
 #include "refrence.h"
+#include "bad_request.h"
+#include "not_found.h"
+#include "‫‪permission‬‬_denied‬.h‬"
 
 class Film
 {
 private:
 	int id, year, length;
 	string name, summary, director;
-	int rate, rate_number;
+	Rate rate;
 public:
-	Film();
+	Film(Input input, int _id);
 	~Film();
 	
 };

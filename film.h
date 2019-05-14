@@ -15,6 +15,7 @@ private:
 	bool is_visible;
 public:
 	Film(Input input, int _id);
+	void edit(Input input);
 	~Film();
 	
 };

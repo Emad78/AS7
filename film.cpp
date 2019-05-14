@@ -14,3 +14,19 @@ Film::Film(Input input)
 	rate.user_id.clear();	
 	is_visible = true;
 }
+
+void Film::edit(Input input)
+{
+	if(input.info[YEAR] != "")
+		year = stoi(input.info[YEAR]);
+	if(input.info[LENGTH] != "")
+		length = stoi(input.info[LENGTH]);
+	if(input.info[NAME] != "")
+		name = input.info[NAME];
+	if(input.info[SUMMARY] != "")
+		summary = input.info[SUMMARY];
+	if(input.info[DIRECTOR] != "")
+		director = input.info[DIRECTOR];
+	if(year == 0 || length == 0)
+		throw Bad_request();	
+}

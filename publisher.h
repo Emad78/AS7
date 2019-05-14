@@ -8,9 +8,8 @@ class Publisher : public Person
 {
 private:
 	vector<Person*> followers;
-	
 public:
-	Publisher();
+	Publisher(Input input, int _id);
 	~Publisher();
 	
 };

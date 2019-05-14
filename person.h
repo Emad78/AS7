@@ -17,6 +17,7 @@ private:
 public:
 	person(Input input, int _id);
 	string get_username();
+	bool get_is_publisher();
 	string get_password();
 	~person();
 	

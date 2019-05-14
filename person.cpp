@@ -22,3 +22,8 @@ void Person::get_password()
 {
 	return password;
 }
+
+bool Person::get_is_publisher()
+{
+	return info.is_publisher;
+}

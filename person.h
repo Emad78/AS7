@@ -7,14 +7,12 @@
 class Person
 {
 private:
-	//struct//
-	string username, email, password;
-	int age;
-	bool is_publisher;
+	Info info;
+	int id;
 	vector<Film*> bought_films;  // pointer or not
 	int money;
 public:
-	person();
+	person(Input input, int _id);
 	~person();
 	
 };

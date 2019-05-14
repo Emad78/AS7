@@ -119,6 +119,21 @@ void System::signup()
 	else
 		new_user = Person(input, users.size() + 1);
 	users.push_back(new_user);
+	now_user = new_user;
+}
+
+void System::login()
+{
+	Person* new_user;
+	new_user = search_user(input.info[USERNAME]);
+	if(new_user == NULL)
+		throw Bad_request();
+	if(new_user->get_password() != input.info[PASSWORD])
+	{
+		delete new_user;
+		throw Bad_request();		
+	}
+	now_user = new_user;
 }
 
 void System::put_metod()

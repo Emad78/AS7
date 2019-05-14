@@ -12,6 +12,7 @@ private:
 	int id, year, length;
 	string name, summary, director;
 	Rate rate;
+	bool is_visible;
 public:
 	Film(Input input, int _id);
 	~Film();

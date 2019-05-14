@@ -12,4 +12,5 @@ Film::Film(Input input)
 		throw Bad_request();
 	rate.score.clear();
 	rate.user_id.clear();	
+	is_visible = true;
 }

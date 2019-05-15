@@ -7,7 +7,7 @@ class Not_found : public exception
 {
 public:
 	virtual const char* what() const throw()
-	{return "Not Found"};
+	{return "Not Found";};
 };
 
 #endif

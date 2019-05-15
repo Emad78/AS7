@@ -7,7 +7,7 @@ class Bad_request : public exception
 {
 public:
 	virtual const char* what() const throw()
-	{return "Bad Request"};
+	{return "Bad Request";};
 };
 
 #endif

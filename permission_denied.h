@@ -7,7 +7,7 @@ class Permission_denied : public exception
 {
 public:
 		virtual const char* what() const throw()
-		{return "Permission Denied"};
+		{return "Permission Denied";};
 };
 
 #endif

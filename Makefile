@@ -3,7 +3,7 @@ cc := g++ -c -std=c++11
 all:a.out
 
 a.out: main.o command.o system.o publisher.o person.o film.o
-	$(cc) main.o command.o system.o publisher.o person.o film.o
+	g++ main.o command.o system.o publisher.o person.o film.o
 
 main.o: main.cpp refrence.h system.h
 	$(cc) main.cpp

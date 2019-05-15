@@ -17,6 +17,9 @@ Film::Film(Input input)
 
 void Film::edit(Input input)
 {
+	if(stoi(input.info[YEAR]) == 0 ||
+		stoi(input.info[LENGTH]) == 0)
+		throw Bad_request();	
 	if(input.info[YEAR] != "")
 		year = stoi(input.info[YEAR]);
 	if(input.info[LENGTH] != "")
@@ -27,11 +30,14 @@ void Film::edit(Input input)
 		summary = input.info[SUMMARY];
 	if(input.info[DIRECTOR] != "")
 		director = input.info[DIRECTOR];
-	if(year == 0 || length == 0)
-		throw Bad_request();	
 }
 
 int Film::get_id()
 {
 	return id;
+}
+
+bool Film::ge_is_visible()
+{
+	return is_visible;
 }

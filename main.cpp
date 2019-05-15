@@ -3,6 +3,6 @@
 
 int main()
 {
-	System system();
+	System system;
 	system.run();
 }

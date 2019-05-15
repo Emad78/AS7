@@ -173,13 +173,25 @@ void System::put_films()
 {
 	if(now_user->get_is_publisher() == false)
 		throw Permission_denied();
+	if(search_film(input.info[FILM_ID]) == NULL)
+		throw Not_found();
 	Film* now_film = now_user->search_my_film(input.info[FILM_ID]); 
 	if(now_film == NULL)
 	{
 		delete now_film;
 		throw Permission_denied();
 	}
+	if(now_film->get_is_visible() == false)
+		throw Bad_request();
 	now_film->edit(input);
+}
+
+Film* System::search_film(int film_id)
+{
+	fir(int i = 0; i < films.size(); i++)
+	if(film_id == films[i]->get_id())
+		return films[i];
+	return NULL;
 }
 
 void System::get_metod()

@@ -31,6 +31,7 @@ public:
 	void login();
 	void post_films();
 	Person* search_user(string username);
+	Film* search_film(int film_id);
 	~System();
 };
 

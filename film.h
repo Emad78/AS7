@@ -4,12 +4,12 @@
 #include "refrence.h"
 #include "bad_request.h"
 #include "not_found.h"
-#include "‫‪permission‬‬_denied‬.h‬"
+#include "permission_denied.h"
 
 class Film
 {
 private:
-	int id, year, length;
+	int id, year, length, price;
 	string name, summary, director;
 	Rate rate;
 	bool is_visible;
@@ -18,7 +18,7 @@ public:
 	void edit(Input input);
 	int get_id();
 	bool get_is_visible();
-	~Film();
+//	~Film();
 	
 };
 

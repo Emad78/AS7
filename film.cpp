@@ -1,14 +1,15 @@
 #include "film.h"
 
-Film::Film(Input input)
+Film::Film(Input input, int _id)
 {
 	id = _id;
 	year = stoi(input.info[YEAR]);
 	length = stoi(input.info[LENGTH]);
+	price = stoi(input.info[PRICE]);
 	name = input.info[NAME];
 	summary = input.info[SUMMARY];
 	director = input.info[DIRECTOR];
-	if(year == 0 || length == 0)
+	if(year <= 0 || length <= 0 || price <= 0)
 		throw Bad_request();
 	rate.score.clear();
 	rate.user_id.clear();	
@@ -17,9 +18,6 @@ Film::Film(Input input)
 
 void Film::edit(Input input)
 {
-	if(stoi(input.info[YEAR]) == 0 ||
-		stoi(input.info[LENGTH]) == 0)
-		throw Bad_request();	
 	if(input.info[YEAR] != "")
 		year = stoi(input.info[YEAR]);
 	if(input.info[LENGTH] != "")
@@ -30,6 +28,8 @@ void Film::edit(Input input)
 		summary = input.info[SUMMARY];
 	if(input.info[DIRECTOR] != "")
 		director = input.info[DIRECTOR];
+	if(input.info[PRICE] != "")
+		price = stoi(input.info[PRICE]);
 }
 
 int Film::get_id()
@@ -37,7 +37,7 @@ int Film::get_id()
 	return id;
 }
 
-bool Film::ge_is_visible()
+bool Film::get_is_visible()
 {
 	return is_visible;
 }

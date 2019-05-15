@@ -11,8 +11,8 @@ private:
 	vector<Film*> my_films;
 public:
 	Publisher(Input input, int _id);
+	Film* search_my_film(int _id);
 	void add_my_film(Film* new_film);
-	void search_my_film(int _id);
 	~Publisher();
 	
 };

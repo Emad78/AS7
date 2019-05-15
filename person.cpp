@@ -3,7 +3,7 @@
 Person::Person(Input input, int _id)
 {
 	if(input.info[USERNAME] == "" || input.info[PASSWORD] == ""
-		|| input.info[EMAIL] == "" || input.info[AGE])
+		|| input.info[EMAIL] == "" || input.info[AGE] == "")
 		throw Bad_request();
 	info.username = input.info[USERNAME];
 	info.password = input.info[PASSWORD];
@@ -13,14 +13,14 @@ Person::Person(Input input, int _id)
 	id = _id; 
 }
 
-void Person::get_username()
+string Person::get_username()
 {
-	return username;
+	return info.username;
 }
 
-void Person::get_password()
+string Person::get_password()
 {
-	return password;
+	return info.password;
 }
 
 bool Person::get_is_publisher()

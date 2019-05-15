@@ -29,7 +29,7 @@
 
 #define USER_ID "user_id"
 
-#define AMUONT "amount"
+#define AMOUNT "amount"
 
 #define SCORE "score"
 
@@ -62,8 +62,8 @@ using namespace std;
 struct Input
 {
 	map<string,string> info;
-	int method;
-	int request;
+	string metod;
+	string request;
 };
 
 struct Info

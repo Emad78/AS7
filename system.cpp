@@ -3,7 +3,6 @@
 System::System()
 {
 	system_money = 0;
-	command = new Command();
 	users.clear();
 	now_user = NULL;	
 }
@@ -27,7 +26,7 @@ void System::run()
 		{
 			getline(cin, line);
 			command = new Command(line);
-			input = command.get_input();
+			input = command->get_input();
 			process();
 			delete command;
 
@@ -43,7 +42,7 @@ void System::process()
 	metod_detect();	
 }
 
-void System::search_user(string username)
+Person* System::search_user(string username)
 {
 	for(int i = 0; i < users.size(); i++)
 		if(username == users[i]->get_username())
@@ -53,68 +52,49 @@ void System::search_user(string username)
 
 void System::metod_detect()
 {
-	switch (input.metod)
-	{
-		case PUT:
-			put_metod();
-			break;
-		case POST:
-			post_metod();
-			break;
-		case GET:
-			get_metod();
-			break;
-		case DELETE:
-			delete_metod();
-			break;
-		default:
-			throw Bad_request();
-			break;
-	}
+	string metod = input.metod;
+	if(metod == PUT)
+		put_metod();
+	else if(metod == POST)
+		post_metod();
+	else if(metod == GET)
+		get_metod();
+	else if(metod == DELETE)
+		delete_metod();
+	else
+		throw Bad_request();
 }
 
 void System::post_metod()
 {
-	switch(input.request)
-	{
-		case LOGIN:
-			login();
-			break;
-		case SIGNUP:
-			signup();
-			break;
-		case FILMS:
-			post_films();
-			break;
-		case MONEY:
-			post_money();
-			break;
-		case REPLIES:
-			replies();
-			break;
-		case FOLLOWERS:
-			post_followers();
-			break;
-		case BUY:
-			buy();
-			break;
-		case RATE:
-			rate();
-			break;
-		case COMMENTS:
-			post_comments();
-			break;
-		default:
-			throw Not_found();
-			break;
-	}
+	string re = input.request;
+	if(re == LOGIN)
+		login();
+	else if(re == SIGNUP)
+		signup();
+	else if(re == FILMS)
+		post_films();
+/*	else if(re == MONEY)
+		post_money();
+	else if(re == REPLIES)
+		replies();
+	else if(re == FOLLOWERS)
+		post_followers();
+	else if(re == BUY)
+		buy();
+	else if(re == RATE)
+		rate();
+	else if(re == COMMENTS)
+		post_comments();
+*/	else
+		throw Not_found();
 }
 
 void System::post_films()
 {
 	if(input.info[NAME] == "" || input.info[YEAR] == ""
 		|| input.info[LENGTH] == "" || input.info[PRICE] == ""
-		|| input.info[SUMMARY] == "" || input.info[DIRECTORY] == "")
+		|| input.info[SUMMARY] == "" || input.info[DIRECTOR] == "")
 		throw Bad_request();
 	if(now_user == NULL)
 		throw Permission_denied();
@@ -130,12 +110,12 @@ void System::post_films()
 void System::signup()
 {
 	Person* new_user;
-	if(search_user(input.info[USERNAME] != NULL))
+	if(search_user(input.info[USERNAME]) != NULL)
 		throw Bad_request();
 	if(input.info[PUBLISHER] == "true")
-		new_user = Publisher(input, users.size() + 1);
+		new_user = new Publisher(input, users.size() + 1);
 	else
-		new_user = Person(input, users.size() + 1);
+		new_user = new Person(input, users.size() + 1);
 	users.push_back(new_user);
 	now_user = new_user;
 	cout<<OK<<endl;
@@ -158,24 +138,19 @@ void System::login()
 
 void System::put_metod()
 {
-	switch(input.request)
-	{
-		case FILMS:
-			put_films();
-			break;
-		default:
-			throw Not_found();
-			break;
-	}
+	if(input.request == FILMS)
+		put_films();
+	else
+		throw Not_found();
 }
 
 void System::put_films()
 {
 	if(now_user->get_is_publisher() == false)
 		throw Permission_denied();
-	if(search_film(input.info[FILM_ID]) == NULL)
+	if(search_film(stoi(input.info[FILM_ID])) == NULL)
 		throw Not_found();
-	Film* now_film = now_user->search_my_film(input.info[FILM_ID]); 
+	Film* now_film = now_user->search_my_film(stoi(input.info[FILM_ID])); 
 	if(now_film == NULL)
 	{
 		delete now_film;
@@ -188,7 +163,7 @@ void System::put_films()
 
 Film* System::search_film(int film_id)
 {
-	fir(int i = 0; i < films.size(); i++)
+	for(int i = 0; i < films.size(); i++)
 	if(film_id == films[i]->get_id())
 		return films[i];
 	return NULL;
@@ -196,47 +171,33 @@ Film* System::search_film(int film_id)
 
 void System::get_metod()
 {
-	switch(input.request)
-	{
-		case FOLLOWERS:
-			get_followers();
-			break;
-		case PUBLISHED:
-			published();
-			break;
-		case FILMS:
-			get_films();
-			break;
-		case PURCHASED:
-			purchased();
-			break;
-		case NOTIFICATIONS:
-			notifications();
-			break;
-		case NOTIFICATIONSREAD:
-			notificationsread();
-			break;
-		default:
-			throw Not_found();
-			break;
-	}
-}
+/*	string re = input.request;
+	if(re == FOLLOWERS)
+		get_followers();
+	else if(re == PUBLISHED)
+		published();
+	else if(re == FILMS)
+		get_films();
+	else if(re == PURCHASED)
+		purchased();
+	else if(re == NOTIFICATIONS)
+		notifications();
+	else if(re == NOTIFICATIONSREAD)
+		notificationsread();
+	else 
+		throw Bad_request();
+*/}
 
 void System::delete_metod()
 {
-	switch (input.request)
-	{
-		case FILMS:
-			delete_films();
-			break;
-		case COMMENTS:
-			delete_comments();
-			break;
-		default:
-			throw Not_found();
-			break;
-	}
-}
+/*	string re = input.request;
+	if(re == FILMS)
+		delete_films();
+	else if(re == COMMENTS)
+		delete_comments();
+	else 
+		throw Bad_request();
+*/}
 
 
 

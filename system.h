@@ -5,9 +5,10 @@
 #include "film.h"
 #include "person.h"
 #include "publisher.h"
+#include "command.h"
 #include "bad_request.h"
 #include "not_found.h"
-#include "‫‪permission‬‬_denied‬.h‬"
+#include "permission_denied.h"
 
 class System
 {
@@ -17,7 +18,7 @@ private:
 	int system_money;
 	Command* command;
 	Person* now_user;
-	Input = input;
+	Input input;
 public:
 	System();
 	void run();
@@ -30,6 +31,7 @@ public:
 	void signup();
 	void login();
 	void post_films();
+	void put_films();
 	Person* search_user(string username);
 	Film* search_film(int film_id);
 	~System();

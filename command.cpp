@@ -1,6 +1,6 @@
 #include "command.h"
 
-Command::command(string _line)
+Command::Command(string _line)
 {
 	set();
 	line = _line;
@@ -49,17 +49,19 @@ string Command::seprate_word(string &sentence,char delimiter = ' ')
 Input Command::get_input()
 {
 	set();
-	input.method = seprate_word(line);
+	input.metod = seprate_word(line);
 	input.request = seprate_word(line);
-	if(input.request == NOTIFICATIONS)
-		if(seprate_word(line) == READ)
-			input.request = NOTIFICATIONS_READ;	I
 	string key, value;
+	key = seprate_word(line);
+	if(input.request == NOTIFICATIONS)
+		if(key == READ)
+			input.request = NOTIFICATIONS_READ;
 	while(line != "")
 	{
 		key = seprate_word(line);
 		value = seprate_word(line);
 		input.info[key] = value;        //hashing
 	}
+	return input;
 }
 

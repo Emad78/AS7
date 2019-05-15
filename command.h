@@ -4,7 +4,7 @@
 #include "refrence.h"
 #include "bad_request.h"
 #include "not_found.h"
-#include "‫‪permission‬‬_denied‬.h‬"
+#include "permission_denied.h"
 
 class Command
 {
@@ -12,9 +12,9 @@ private:
 	Input input;
 	string line;
 public:
-	command();
+	Command(string _line);
 	void set();
-	Input get_input(string line);
+	Input get_input();
 	string seprate_word(string &sentence,char delimiter);
 	friend class Person;
 	friend class System;

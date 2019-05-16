@@ -199,9 +199,9 @@ void System::delete_films()
 {
 	check_user(true);
 	Film* deleted_film;
-	if(search_film(stoi(input[FILM_ID])) == NULL)
+	if(search_film(stoi(input.info[FILM_ID])) == NULL)
 		throw Not_found();
-	deleted_film = now_user->search_my_film(stoi(input[FILM_ID]));
+	deleted_film = now_user->search_my_film(stoi(input.info[FILM_ID]));
 	if(deleted_film == NULL)
 		throw Permission_denied();
 	deleted_film->_delete();

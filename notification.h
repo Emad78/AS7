@@ -1,21 +1,20 @@
-#ifndef COMENT_H
-#define COMENT_H
+#ifndef NOTIFICATION_H
+#define NOTIFICATION_H
 
 #include "refrence.h"
 #include "bad_request.h"
 #include "not_found.h"
 #include "permission_denied.h"
 
-class Coment
+class Notification
 {
 private:
-	int id, person_id;
 	string content;
-	vector<string> replies;
+	bool is_read;
 public:
-	Coment();
-	int reply(Input input);
-	~Coment();
+	Notification(string _content);
+	~Notification();
+	
 };
 
 #endif

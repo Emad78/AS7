@@ -32,6 +32,7 @@ public:
 	void login();
 	void post_films();
 	void put_films();
+	 void check_user(bool is_publisher);
 	Person* search_user(string username);
 	Film* search_film(int film_id);
 	~System();

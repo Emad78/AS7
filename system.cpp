@@ -96,10 +96,7 @@ void System::post_films()
 		|| input.info[LENGTH] == "" || input.info[PRICE] == ""
 		|| input.info[SUMMARY] == "" || input.info[DIRECTOR] == "")
 		throw Bad_request();
-	if(now_user == NULL)
-		throw Permission_denied();
-	if(now_user->get_is_publisher() == false)
-		throw Permission_denied();			
+	check_user(true);
 	Film* new_film;
 	new_film = new Film(input, films.size() + 1);
 	films.push_back(new_film);
@@ -146,8 +143,7 @@ void System::put_metod()
 
 void System::put_films()
 {
-	if(now_user->get_is_publisher() == false)
-		throw Permission_denied();
+	check_user(true);
 	if(search_film(stoi(input.info[FILM_ID])) == NULL)
 		throw Not_found();
 	Film* now_film = now_user->search_my_film(stoi(input.info[FILM_ID])); 
@@ -190,16 +186,34 @@ void System::get_metod()
 
 void System::delete_metod()
 {
-/*	string re = input.request;
+	string re = input.request;
 	if(re == FILMS)
 		delete_films();
-	else if(re == COMMENTS)
+/*	else if(re == COMMENTS)
 		delete_comments();
-	else 
+*/	else 
 		throw Bad_request();
-*/}
+}
 
+void System::delete_films()
+{
+	check_user(true);
+	Film* deleted_film;
+	if(search_film(stoi(input[FILM_ID])) == NULL)
+		throw Not_found();
+	deleted_film = now_user->search_my_film(stoi(input[FILM_ID]));
+	if(deleted_film == NULL)
+		throw Permission_denied();
+	deleted_film->delete();
+}
 
+void System::check_user(bool is_publisher)
+{
+	if(now_user->get_is_publisher() == is_publisher)
+		throw Permission_denied();
+	if(now_user == NULL)
+		throw Permission_denied();		
+}
 
 
 

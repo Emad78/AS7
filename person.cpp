@@ -27,3 +27,13 @@ bool Person::get_is_publisher()
 {
 	return info.is_publisher;
 }
+ostream& operator<<(ostream& out, Person* person)
+{
+	out<<person->id<<" | ";
+	out<<person->info.username<<" | ";
+	out<<person->info.email;
+	return out;
+}
+
+
+

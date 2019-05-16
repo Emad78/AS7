@@ -19,3 +19,11 @@ Film* Publisher::search_my_film(int _id)
 			return my_films[i];
 	return NULL;
 }
+
+void Publisher::print_followers()
+{
+	cout<<"List of Followers"<<endl;
+	cout<<"#. User Id"<<" | "<<"User Username"<<" | "<<"User Email"<<endl;
+	for(int i = 0; i < followers.size(); i++)
+		cout<<to_string(i)<<". "<<followers[i]<<endl;
+}

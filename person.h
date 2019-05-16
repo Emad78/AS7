@@ -19,8 +19,10 @@ public:
 	string get_username();
 	bool get_is_publisher();
 	Film* search_my_film(int _id){};
+	void print_followers() {};
 	void add_my_film(Film* new_film){};
 	string get_password();
+	friend ostream& operator<<(ostream& out, Person* person);
 //	~Person();
 	
 };

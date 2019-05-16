@@ -12,6 +12,7 @@ private:
 public:
 	Publisher(Input input, int _id);
 	Film* search_my_film(int _id);
+	void print_followers();
 	void add_my_film(Film* new_film);
 	~Publisher();
 	

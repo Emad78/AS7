@@ -18,11 +18,12 @@ public:
 	Person(Input input, int _id);
 	string get_username();
 	bool get_is_publisher();
-	Film* search_my_film(int _id){};
-	void print_followers() {};
-	void add_my_film(Film* new_film){};
+	virtual Film* search_my_film(int _id){};
+	virtual void print_followers() {};
+	virtual void add_my_film(Film* new_film){};
 	string get_password();
-	int catch_money() {};
+	virtual int catch_money() {};
+	virtual void print_published(Input input) {};
 	friend ostream& operator<<(ostream& out, Person* person);
 //	~Person();
 	

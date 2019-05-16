@@ -19,6 +19,9 @@ public:
 	int get_id();
 	bool get_is_visible();
 	void _delete();
+	double _rate();
+	bool is_same_film(Input input);
+	friend ostream& operator<<(ostream& out, Film* film);
 //	~Film();
 	
 };

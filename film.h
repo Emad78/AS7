@@ -2,6 +2,7 @@
 #define FILM_H
 
 #include "refrence.h"
+#include "coment.h"
 #include "bad_request.h"
 #include "not_found.h"
 #include "permission_denied.h"
@@ -12,6 +13,7 @@ private:
 	int id, year, length, price;
 	string name, summary, director;
 	Rate rate;
+	vector<Coment*> coments;
 	bool is_visible;
 public:
 	Film(Input input, int _id);

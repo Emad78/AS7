@@ -23,6 +23,7 @@ public:
 	void _delete();
 	double _rate();
 	bool is_same_film(Input input);
+	int reply(Input input);
 	friend ostream& operator<<(ostream& out, Film* film);
 //	~Film();
 	

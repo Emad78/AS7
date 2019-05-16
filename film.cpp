@@ -86,7 +86,12 @@ ostream& operator<<(ostream& out, Film* film)
 	return out;
 }
 
-
+int Film::reply(Input input)
+{
+	if(stoi(input.info[COMENT_ID]) > coments.size())
+		throw Bad_request();
+	return coments[stoi(input.info[COMENT_ID]) - 1]->reply(input);
+}
 
 
 

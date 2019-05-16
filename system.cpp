@@ -167,10 +167,10 @@ Film* System::search_film(int film_id)
 
 void System::get_metod()
 {
-/*	string re = input.request;
+	string re = input.request;
 	if(re == FOLLOWERS)
 		get_followers();
-	else if(re == PUBLISHED)
+/*	else if(re == PUBLISHED)
 		published();
 	else if(re == FILMS)
 		get_films();
@@ -180,9 +180,15 @@ void System::get_metod()
 		notifications();
 	else if(re == NOTIFICATIONSREAD)
 		notificationsread();
-	else 
+*/	else 
 		throw Bad_request();
-*/}
+}
+
+void System::get_followers()
+{
+	check_user(true);
+	now_user->print_followers();
+}
 
 void System::delete_metod()
 {
@@ -205,14 +211,15 @@ void System::delete_films()
 	if(deleted_film == NULL)
 		throw Permission_denied();
 	deleted_film->_delete();
+	cout<<OK<<endl;
 }
 
 void System::check_user(bool is_publisher)
 {
-	if(now_user->get_is_publisher() == is_publisher)
-		throw Permission_denied();
 	if(now_user == NULL)
 		throw Permission_denied();		
+	if(now_user->get_is_publisher() == is_publisher)
+		throw Permission_denied();
 }
 
 

@@ -34,6 +34,7 @@ public:
 	void put_films();
 	void delete_films();
 	void check_user(bool is_publisher);
+	void get_followers();
 	Person* search_user(string username);
 	Film* search_film(int film_id);
 	~System();

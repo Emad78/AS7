@@ -41,3 +41,8 @@ bool Film::get_is_visible()
 {
 	return is_visible;
 }
+
+void Film::_delete()
+{
+	is_visible = false;
+}

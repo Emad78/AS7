@@ -2,7 +2,7 @@
 
 System::System()
 {
-	system_money = 0;
+	money = 0;
 	users.clear();
 	now_user = NULL;	
 }
@@ -74,9 +74,9 @@ void System::post_metod()
 		signup();
 	else if(re == FILMS)
 		post_films();
-/*	else if(re == MONEY)
+	else if(re == MONEY)
 		post_money();
-	else if(re == REPLIES)
+/*	else if(re == REPLIES)
 		replies();
 	else if(re == FOLLOWERS)
 		post_followers();
@@ -88,6 +88,15 @@ void System::post_metod()
 		post_comments();
 */	else
 		throw Not_found();
+}
+
+void System::post_money()
+{
+	if(input.info[AMOUNT] == "")
+	{
+		check_user(true);
+		money -= now_user->catch_money();
+	}
 }
 
 void System::post_films()
@@ -218,7 +227,7 @@ void System::check_user(bool is_publisher)
 {
 	if(now_user == NULL)
 		throw Permission_denied();		
-	if(now_user->get_is_publisher() == is_publisher)
+	if(now_user->get_is_publisher() != is_publisher)
 		throw Permission_denied();
 }
 

@@ -15,7 +15,7 @@ class System
 private:
 	vector<Film*> films;
 	vector<Person*> users;
-	int system_money;
+	int money;
 	Command* command;
 	Person* now_user;
 	Input input;
@@ -35,6 +35,7 @@ public:
 	void delete_films();
 	void check_user(bool is_publisher);
 	void get_followers();
+	void post_money();
 	Person* search_user(string username);
 	Film* search_film(int film_id);
 	~System();

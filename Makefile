@@ -2,8 +2,8 @@ cc := g++ -c -std=c++11
 
 all:a.out
 
-a.out: main.o command.o system.o publisher.o person.o film.o coment.o
-	g++ main.o command.o system.o publisher.o person.o film.o coment.o
+a.out: main.o command.o system.o publisher.o person.o film.o coment.o notification.o
+	g++ main.o command.o system.o publisher.o person.o film.o coment.o notification.o
 
 main.o: main.cpp refrence.h system.h
 	$(cc) main.cpp
@@ -25,6 +25,9 @@ film.o: film.cpp film.h refrence.h bad_request.h not_found.h permission_denied.h
 
 coment.o: coment.cpp coment.h refrence.h bad_request.h not_found.h permission_denied.h
 	$(cc) coment.cpp
+
+notification.o: notification.cpp notification.h refrence.h bad_request.h not_found.h permission_denied.h
+	$(cc) notification.cpp
 
 .PHONY: clean
 clean:

@@ -102,6 +102,17 @@ void System::replies()
 	send_reply(now_film); 
 }
 
+void System::send_reply(Film* now_film)
+{
+	int person_id = now_film->reply(input);
+	send_notif(person_id);
+}
+
+void System::send_notif(int person_id)
+{
+	users[person_id]->catch_notif(input);
+}
+
 void System::post_money()
 {
 	if(input.info[AMOUNT] == "")

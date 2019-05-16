@@ -38,6 +38,8 @@ public:
 	void post_money();
 	void published();
 	void replies();
+	void send_reply(Film* now_film);
+	void send_notif(int person_id);
 	Film* check_film_for_publisher();
 	Person* search_user(string username);
 	Film* search_film(int film_id);

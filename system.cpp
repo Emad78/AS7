@@ -204,7 +204,7 @@ void System::delete_films()
 	deleted_film = now_user->search_my_film(stoi(input[FILM_ID]));
 	if(deleted_film == NULL)
 		throw Permission_denied();
-	deleted_film->delete();
+	deleted_film->_delete();
 }
 
 void System::check_user(bool is_publisher)

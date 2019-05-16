@@ -115,6 +115,9 @@ void System::post_films()
 
 void System::signup()
 {
+	if(input.info[USERNAME] == "" || input.info[PASSWORD] == ""
+		|| input.info[EMAIL] == "" || input.info[AGE] == "")
+		throw Bad_request();
 	Person* new_user;
 	if(search_user(input.info[USERNAME]) != NULL)
 		throw Bad_request();
@@ -129,6 +132,8 @@ void System::signup()
 
 void System::login()
 {
+	if(input.info[USERNAME] == "" || input.info[PASSWORD] == "")
+		throw Bad_request();
 	Person* new_user;
 	new_user = search_user(input.info[USERNAME]);
 	if(new_user == NULL)
@@ -176,12 +181,13 @@ Film* System::search_film(int film_id)
 
 void System::get_metod()
 {
+	cout<<2<<endl;
 	string re = input.request;
 	if(re == FOLLOWERS)
 		get_followers();
-/*	else if(re == PUBLISHED)
+	else if(re == PUBLISHED)
 		published();
-	else if(re == FILMS)
+/*	else if(re == FILMS)
 		get_films();
 	else if(re == PURCHASED)
 		purchased();
@@ -193,9 +199,17 @@ void System::get_metod()
 		throw Bad_request();
 }
 
-void System::get_followers()
+void System::published()
 {
 	check_user(true);
+	now_user->print_published(input);
+}
+
+void System::get_followers()
+{
+	cout<<1<<endl;
+	check_user(true);
+	cout<<1<<endl;
 	now_user->print_followers();
 }
 

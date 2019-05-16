@@ -11,6 +11,7 @@ Person::Person(Input input, int _id)
 	info.age = stoi(input.info[AGE]);
 	info.is_publisher = false;
 	id = _id; 
+	money = 0;
 }
 
 string Person::get_username()

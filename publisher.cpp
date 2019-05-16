@@ -3,6 +3,7 @@
 Publisher::Publisher(Input input, int _id)
 : Person(input, _id)
 {
+	second_money = 0;
 	info.is_publisher = true;
 	followers.clear();
 }
@@ -26,4 +27,12 @@ void Publisher::print_followers()
 	cout<<"#. User Id"<<" | "<<"User Username"<<" | "<<"User Email"<<endl;
 	for(int i = 0; i < followers.size(); i++)
 		cout<<to_string(i)<<". "<<followers[i]<<endl;
+}
+
+int Publisher::catch_money()
+{
+	int catching = second_money;
+	money += second_money;
+	second_money = 0;
+	return catching;
 }

@@ -22,6 +22,7 @@ public:
 	void print_followers() {};
 	void add_my_film(Film* new_film){};
 	string get_password();
+	int catch_money() {};
 	friend ostream& operator<<(ostream& out, Person* person);
 //	~Person();
 	

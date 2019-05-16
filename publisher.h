@@ -9,10 +9,12 @@ class Publisher : public Person
 private:
 	vector<Person*> followers;
 	vector<Film*> my_films;
+	int second_money;
 public:
 	Publisher(Input input, int _id);
 	Film* search_my_film(int _id);
 	void print_followers();
+	int catch_money();
 	void add_my_film(Film* new_film);
 	~Publisher();
 	

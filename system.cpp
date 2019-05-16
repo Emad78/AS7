@@ -76,9 +76,9 @@ void System::post_metod()
 		post_films();
 	else if(re == MONEY)
 		post_money();
-/*	else if(re == REPLIES)
+	else if(re == REPLIES)
 		replies();
-	else if(re == FOLLOWERS)
+/*	else if(re == FOLLOWERS)
 		post_followers();
 	else if(re == BUY)
 		buy();
@@ -88,6 +88,18 @@ void System::post_metod()
 		post_comments();
 */	else
 		throw Not_found();
+}
+
+void System::replies()
+{
+	if(input.info[FILM_ID] == "" || input.info[CONTENT] == ""
+		|| input.info[COMENT_ID] == "")
+		throw Bad_request();	
+	check_user(true);
+	if(search_film(stoi(input.info[FILM_ID])) == NULL)
+		throw Not_found();
+	Film* now_film = check_film_for_publisher();
+	send_reply(now_film); 
 }
 
 void System::post_money()
@@ -155,11 +167,8 @@ void System::put_metod()
 		throw Not_found();
 }
 
-void System::put_films()
+Film* System::check_film_for_publisher()
 {
-	check_user(true);
-	if(search_film(stoi(input.info[FILM_ID])) == NULL)
-		throw Not_found();
 	Film* now_film = now_user->search_my_film(stoi(input.info[FILM_ID])); 
 	if(now_film == NULL)
 	{
@@ -168,6 +177,15 @@ void System::put_films()
 	}
 	if(now_film->get_is_visible() == false)
 		throw Bad_request();
+	return now_film;	
+}
+
+void System::put_films()
+{
+	check_user(true);
+	if(search_film(stoi(input.info[FILM_ID])) == NULL)
+		throw Not_found();
+	Film* now_film = check_film_for_publisher(); 
 	now_film->edit(input);
 }
 

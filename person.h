@@ -20,13 +20,14 @@ public:
 	Person(Input input, int _id);
 	string get_username();
 	bool get_is_publisher();
+	void add_money(Input input);
 	virtual Film* search_my_film(int _id){};
 	virtual void print_followers() {};
 	virtual void add_my_film(Film* new_film){};
 	string get_password();
 	void catch_notif(string content);
-	void inform_followers(){};
-	void add_follower(Person* follower){};
+	virtual	void inform_followers(){};
+	virtual	void add_follower(Person* follower){};
 	virtual int catch_money() {};
 	virtual void print_published(Input input) {};
 	friend ostream& operator<<(ostream& out, Person* person);

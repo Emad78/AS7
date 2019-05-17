@@ -99,7 +99,7 @@ void System::rate()
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
 	now_film->rating(stoi(input.info[SCORE]), now_user->get_id());
 	Person* publisher = search_user_whith_id(now_film->get_publisher_id());
-	publisher->catch_notif(now_user->get_username() + " rate to your film");	
+	publisher->catch_notif(now_user->get_username() + " rate to your film");   /////////////notif	
 }
 
 void System::buy()
@@ -112,6 +112,7 @@ void System::buy()
 	if(now_user->get_money() < now_film->get_price())
 		throw Bad_request();
 	now_user->update_money((-1) * now_film->get_price());
+	now_user->add_bought_film(now_film);
 	add_money_for_publisher(now_film);
 	money = now_film->get_price();
 }

@@ -10,13 +10,13 @@
 class Film
 {
 private:
-	int id, year, length, price;
+	int id, year, length, price, publisher_id;
 	string name, summary, director;
 	Rate rate;
 	vector<Comment*> comments;
 	bool is_visible;
 public:
-	Film(Input input, int _id);
+	Film(Input input, int _id, int _publisher_id);
 	void edit(Input input);
 	int get_id();
 	bool get_is_visible();

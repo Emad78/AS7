@@ -1,6 +1,6 @@
 #include "film.h"
 
-Film::Film(Input input, int _id)
+Film::Film(Input input, int _id, int _publisher_id)
 {
 	id = _id;
 	year = stoi(input.info[YEAR]);
@@ -14,6 +14,7 @@ Film::Film(Input input, int _id)
 	rate.score.clear();
 	rate.user_id.clear();	
 	is_visible = true;
+	publisher_id = _publisher_id;
 }
 
 void Film::edit(Input input)

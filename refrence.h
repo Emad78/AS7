@@ -24,7 +24,7 @@
 #define MIN_YEAR "min_year"
 #define MIN_RATE "min_rate"
 
-#define COMENT_ID "coment_id"
+#define COMMENT_ID "coment_id"
 #define CONTENT "content"
 
 #define USER_ID "user_id"

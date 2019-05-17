@@ -23,7 +23,7 @@ void Command::set()
 	input.info.insert({EMAIL, ""});
 	input.info.insert({PUBLISHER, ""});
 	input.info.insert({FILM_ID, ""});
-	input.info.insert({COMENT_ID, ""});
+	input.info.insert({COMMENT_ID, ""});
 	input.info.insert({CONTENT, ""});
 	input.info.insert({USER_ID, ""});
 	input.info.insert({AMOUNT, ""});

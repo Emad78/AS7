@@ -56,7 +56,10 @@ int Person::get_money()
 	return money;
 }
 
-
+void Person::add_bought_film(Film* bought_film)
+{
+	bought_films.push_back(bought_film);
+}
 
 
 

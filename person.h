@@ -19,6 +19,7 @@ protected:
 public:
 	Person(Input input, int _id);
 	string get_username();
+	int get_id();
 	bool get_is_publisher();
 	void add_money(Input input);
 	virtual Film* search_my_film(int _id){};

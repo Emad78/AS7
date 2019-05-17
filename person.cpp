@@ -45,3 +45,13 @@ void Person::add_money(Input input)
 {
 	money += stoi(input.info[AMOUNT]);
 }
+
+int Person::get_id()
+{
+	return id;
+}
+
+
+
+
+

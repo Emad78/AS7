@@ -78,9 +78,9 @@ void System::post_metod()
 		post_money();
 	else if(re == REPLIES)
 		replies();
-/*	else if(re == FOLLOWERS)
+	else if(re == FOLLOWERS)
 		post_followers();
-	else if(re == BUY)
+/*	else if(re == BUY)
 		buy();
 	else if(re == RATE)
 		rate();
@@ -88,6 +88,17 @@ void System::post_metod()
 		post_comments();
 */	else
 		throw Not_found();
+}
+
+void System::post_followers()
+{
+	if(now_user == NULL)
+		throw Permission_denied();
+	if(input.info[USER_ID] == "")
+		throw Bad_request();
+	if(!users[stoi(input.info[USER_ID]) - 1]->get_is_publisher())
+		throw Bad_request();
+	users[stoi(input.info[USER_ID]) - 1]->add_follower(now_user);
 }
 
 void System::replies()
@@ -110,8 +121,8 @@ void System::send_reply(Film* now_film)
 
 void System::send_reply_notif(int person_id)
 {
-	string content = now_user->get_username() +"reply to you";
-	users[person_id]->catch_notif(content);
+	string content = now_user->get_username() +"reply to you";    ///////////notif
+	users[person_id]->catch_notif(content); 
 }
 
 void System::post_money()
@@ -134,7 +145,7 @@ void System::post_films()
 	new_film = new Film(input, films.size() + 1);
 	films.push_back(new_film);
 	now_user->add_my_film(new_film);
-	now_user->inform_followers();
+	now_user->inform_followers();    /////////notif
 	cout<<OK<<endl;
 }
 

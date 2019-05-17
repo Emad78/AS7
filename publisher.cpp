@@ -51,7 +51,12 @@ void Publisher::inform_followers()
 		followers[i]->catch_notif(content);
 }
 
-
+void Publisher::add_follower(Person* follower)
+{
+	string content = follower->get_username() + "follow you";  /////////notif
+	catch_notif(content);
+	followers.push_back(follower);
+}
 
 
 

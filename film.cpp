@@ -88,11 +88,16 @@ ostream& operator<<(ostream& out, Film* film)
 
 int Film::reply(Input input)
 {
-	if(stoi(input.info[COMENT_ID]) > coments.size())
+	if(stoi(input.info[COMMENT_ID]) > comments.size())
 		throw Bad_request();
-	return coments[stoi(input.info[COMENT_ID]) - 1]->reply(input);
+	return comments[stoi(input.info[COMMENT_ID]) - 1]->reply(input);
 }
 
-
+void Film::delete_comment(Input input)
+{
+	if(stoi(input.info[COMMENT_ID]) > comments.size())
+		throw Not_found();
+	comments[stoi(input.info[COMMENT_ID]) - 1]->_delete();
+}
 
 

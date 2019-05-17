@@ -13,7 +13,7 @@ private:
 	int id, year, length, price;
 	string name, summary, director;
 	Rate rate;
-	vector<Coment*> coments;
+	vector<Comment*> comments;
 	bool is_visible;
 public:
 	Film(Input input, int _id);
@@ -21,6 +21,7 @@ public:
 	int get_id();
 	bool get_is_visible();
 	void _delete();
+	void delete_comment(Input input);
 	double _rate();
 	bool is_same_film(Input input);
 	int reply(Input input);

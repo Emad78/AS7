@@ -101,4 +101,7 @@ void Film::delete_comment(Input input)
 	comments[stoi(input.info[COMMENT_ID]) - 1]->_delete();
 }
 
-
+int Film::get_price()
+{
+	return price;
+}

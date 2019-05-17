@@ -38,6 +38,5 @@ ostream& operator<<(ostream& out, Person* person)
 
 void Person::catch_notif(string content)
 {
-	notifications.push_back(new Notification(content);   /// what is notification
+	notifications.push_back(new Notification(content));   /// what is notification
 }
-

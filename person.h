@@ -25,6 +25,7 @@ public:
 	virtual void add_my_film(Film* new_film){};
 	string get_password();
 	void catch_notif(string content);
+	void inform_followers(){};
 	virtual int catch_money() {};
 	virtual void print_published(Input input) {};
 	friend ostream& operator<<(ostream& out, Person* person);

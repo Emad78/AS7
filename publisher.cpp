@@ -44,7 +44,12 @@ void Publisher::print_published(Input input)
 				cout<<to_string(i+1)<<my_films[i]<<endl;
 }
 
-
+void Publisher::inform_followers()
+{
+	string content = get_username() + "send new film";
+	for(int i = 0; i < followers.size(); i++)
+		followers[i]->catch_notif(content);
+}
 
 
 

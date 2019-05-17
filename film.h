@@ -25,6 +25,7 @@ public:
 	void _delete();
 	void delete_comment(Input input);
 	double _rate();
+	void rating(int score, int person_id);
 	bool is_same_film(Input input);
 	int reply(Input input);
 	friend ostream& operator<<(ostream& out, Film* film);

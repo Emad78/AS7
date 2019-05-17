@@ -111,5 +111,24 @@ int Film::get_publisher_id()
 	return publisher_id;
 }
 
+void Film::rating(int score, int person_id)
+{
+	for(int i = 0; i < rate.user_id.size(); i++)
+		if(person_id == rate.user_id[i])
+		{
+			rate.score[i] = score;
+			return;
+		}
+	rate.user_id.push_back(person_id);
+	rate.score.push_back(score);
+}
+
+
+
+
+
+
+
+
 
 

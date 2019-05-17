@@ -51,6 +51,11 @@ int Person::get_id()
 	return id;
 }
 
+int Person::get_money()
+{
+	return money;
+}
+
 
 
 

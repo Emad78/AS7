@@ -1,9 +1,14 @@
 #include "coment.h"
 
-Coment::Coment()
+Comment::Comment()
 {}
-int Coment::reply(Input input)
+int Comment::reply(Input input)
 {
 	replies.push_back(input.info[CONTENT]);
 	return person_id;
+}
+
+void Comment::_delete()
+{
+	is_visible = false;
 }

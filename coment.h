@@ -6,16 +6,18 @@
 #include "not_found.h"
 #include "permission_denied.h"
 
-class Coment
+class Comment
 {
 private:
 	int id, person_id;
 	string content;
+	bool is_visible;
 	vector<string> replies;
 public:
-	Coment();
+	Comment();
 	int reply(Input input);
-	~Coment();
+	void _delete();
+	~Comment();
 };
 
 #endif

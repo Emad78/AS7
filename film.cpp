@@ -105,3 +105,11 @@ int Film::get_price()
 {
 	return price;
 }
+
+int Film::get_publisher_id()
+{
+	return publisher_id;
+}
+
+
+

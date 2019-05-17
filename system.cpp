@@ -93,7 +93,7 @@ void System::post_metod()
 void System::replies()
 {
 	if(input.info[FILM_ID] == "" || input.info[CONTENT] == ""
-		|| input.info[COMENT_ID] == "")
+		|| input.info[COMMENT_ID] == "")
 		throw Bad_request();	
 	check_user(true);
 	if(search_film(stoi(input.info[FILM_ID])) == NULL)
@@ -247,10 +247,20 @@ void System::delete_metod()
 	string re = input.request;
 	if(re == FILMS)
 		delete_films();
-/*	else if(re == COMMENTS)
+	else if(re == COMMENTS)
 		delete_comments();
-*/	else 
+	else 
 		throw Bad_request();
+}
+
+void System::delete_comments()
+{
+	check_user(true);
+	if(input.info[FILM_ID] == "" || input.info[COMMENT_ID] == "")
+		throw Bad_request();
+	Film* now_film;
+	now_film = check_film_for_publisher();
+	now_film->delete_comment(input);
 }
 
 void System::delete_films()

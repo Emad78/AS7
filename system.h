@@ -38,6 +38,7 @@ public:
 	void post_money();
 	void published();
 	void replies();
+	void delete_comments();
 	void send_reply(Film* now_film);
 	void send_notif(int person_id);
 	Film* check_film_for_publisher();

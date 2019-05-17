@@ -80,14 +80,50 @@ void System::post_metod()
 		replies();
 	else if(re == FOLLOWERS)
 		post_followers();
-/*	else if(re == BUY)
+	else if(re == BUY)
 		buy();
-	else if(re == RATE)
+/*	else if(re == RATE)
 		rate();
 	else if(re == COMMENTS)
 		post_comments();
 */	else
 		throw Not_found();
+}
+
+void System::buy()
+{
+	if(now_user == NULL)
+		throw Permission_denied();
+	if(input.info[FILM_ID] == "")
+		throw Bad_request();
+	Film* now_film = search_film(stoi(input.info[FILM_ID]));
+	if(now_user->get_money() < now_film->get_price())
+		throw Bad_request();
+	now_user->update_money((-1) * now_film->get_price());
+	add_money_for_publisher(now_film);
+	money = now_film->get_price();
+}
+
+void System::add_money_for_publisher(Film* now_film)
+{
+	Person* publisher = search_user_whith_id(now_film->get_publisher_id());
+	double factor = 0;
+	int price = now_film->get_price(), rate = now_film->_rate();
+	if(rate < MEDIUM)
+		factor = POOR_FACTOR;
+	if(rate >= MEDIUM && rate < GOOD)
+		factor = MEDIUM_FACTOR;
+	if(rate >= GOOD)
+		factor = GOOD_FACTOR;
+	publisher->update_money(factor * price);
+}
+
+Person* System::search_user_whith_id(int user_id)
+{
+	for(int i = 0; i < users.size(); i++)
+		if(users[i]->get_id() == user_id)
+			return users[i];
+	return NULL;
 }
 
 void System::post_followers()
@@ -138,7 +174,7 @@ void System::post_money()
 	{
 		if(now_user == NULL)
 			throw Permission_denied();
-		now_user->add_money(input);
+		now_user->update_money(stoi(input.info[AMOUNT]));
 	}
 	cout<<OK<<endl;
 }
@@ -151,7 +187,7 @@ void System::post_films()
 		throw Bad_request();
 	check_user(true);
 	Film* new_film;
-	new_film = new Film(input, films.size() + 1);
+	new_film = new Film(input, films.size() + 1, now_user->get_id());
 	films.push_back(new_film);
 	now_user->add_my_film(new_film);
 	now_user->inform_followers();    /////////notif
@@ -304,9 +340,3 @@ void System::check_user(bool is_publisher)
 	if(now_user->get_is_publisher() != is_publisher)
 		throw Permission_denied();
 }
-
-
-
-
-
-

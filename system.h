@@ -28,6 +28,8 @@ public:
 	void post_metod();
 	void get_metod();
 	void delete_metod();
+	void buy();
+	void add_money_for_publisher(Film* now_film);
 	void signup();
 	void login();
 	void post_films();
@@ -44,6 +46,7 @@ public:
 	void send_reply_notif(int person_id);
 	Film* check_film_for_publisher();
 	Person* search_user(string username);
+	Person* search_user_whith_id(int user_id);
 	Film* search_film(int film_id);
 	~System();
 };

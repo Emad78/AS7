@@ -22,7 +22,7 @@ public:
 	string get_username();
 	int get_id();
 	bool get_is_publisher();
-	void add_money(Input input);
+	void update_money(int new_money);
 	virtual Film* search_my_film(int _id){};
 	virtual void print_followers() {};
 	virtual void add_my_film(Film* new_film){};

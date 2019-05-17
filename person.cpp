@@ -41,9 +41,9 @@ void Person::catch_notif(string content)
 	notifications.push_back(new Notification(content));   /// what is notification
 }
 
-void Person::add_money(Input input)
+void Person::update_money(int new_money)
 {
-	money += stoi(input.info[AMOUNT]);
+	money += new_money;
 }
 
 int Person::get_id()

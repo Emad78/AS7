@@ -105,12 +105,13 @@ void System::replies()
 void System::send_reply(Film* now_film)
 {
 	int person_id = now_film->reply(input);
-	send_notif(person_id);
+	send_reply_notif(person_id);
 }
 
-void System::send_notif(int person_id)
+void System::send_reply_notif(int person_id)
 {
-	users[person_id]->catch_notif(input);
+	string content = now_user->get_username() +"reply to you";
+	users[person_id]->catch_notif(content);
 }
 
 void System::post_money()
@@ -133,6 +134,7 @@ void System::post_films()
 	new_film = new Film(input, films.size() + 1);
 	films.push_back(new_film);
 	now_user->add_my_film(new_film);
+	now_user->inform_followers();
 	cout<<OK<<endl;
 }
 

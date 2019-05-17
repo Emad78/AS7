@@ -99,6 +99,7 @@ void System::post_followers()
 	if(!users[stoi(input.info[USER_ID]) - 1]->get_is_publisher())
 		throw Bad_request();
 	users[stoi(input.info[USER_ID]) - 1]->add_follower(now_user);
+	cout<<OK<<endl;
 }
 
 void System::replies()
@@ -111,6 +112,7 @@ void System::replies()
 		throw Not_found();
 	Film* now_film = check_film_for_publisher();
 	send_reply(now_film); 
+	cout<<OK<<endl;
 }
 
 void System::send_reply(Film* now_film)
@@ -132,6 +134,13 @@ void System::post_money()
 		check_user(true);
 		money -= now_user->catch_money();
 	}
+	else
+	{
+		if(now_user == NULL)
+			throw Permission_denied();
+		now_user->add_money(input);
+	}
+	cout<<OK<<endl;
 }
 
 void System::post_films()
@@ -211,6 +220,7 @@ void System::put_films()
 		throw Not_found();
 	Film* now_film = check_film_for_publisher(); 
 	now_film->edit(input);
+	cout<<OK<<endl;
 }
 
 Film* System::search_film(int film_id)
@@ -223,7 +233,6 @@ Film* System::search_film(int film_id)
 
 void System::get_metod()
 {
-	cout<<2<<endl;
 	string re = input.request;
 	if(re == FOLLOWERS)
 		get_followers();
@@ -249,9 +258,7 @@ void System::published()
 
 void System::get_followers()
 {
-	cout<<1<<endl;
 	check_user(true);
-	cout<<1<<endl;
 	now_user->print_followers();
 }
 
@@ -274,6 +281,7 @@ void System::delete_comments()
 	Film* now_film;
 	now_film = check_film_for_publisher();
 	now_film->delete_comment(input);
+	cout<<OK<<endl;
 }
 
 void System::delete_films()

@@ -28,6 +28,7 @@ public:
 	void post_metod();
 	void get_metod();
 	void delete_metod();
+	void rate();
 	void buy();
 	void add_money_for_publisher(Film* now_film);
 	void signup();

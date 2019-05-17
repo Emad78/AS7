@@ -82,12 +82,24 @@ void System::post_metod()
 		post_followers();
 	else if(re == BUY)
 		buy();
-/*	else if(re == RATE)
+	else if(re == RATE)
 		rate();
-	else if(re == COMMENTS)
+/*	else if(re == COMMENTS)
 		post_comments();
 */	else
 		throw Not_found();
+}
+
+void System::rate()
+{
+	if(now_user == NULL)
+		throw Permission_denied();
+	if(input.info[FILM_ID] == "" || input.info[SCORE] == "")
+		throw Bad_request();
+	Film* now_film = search_film(stoi(input.info[FILM_ID]));
+	now_film->rating(stoi(input.info[SCORE]), now_user->get_id());
+	Person* publisher = search_user_whith_id(now_film->get_publisher_id());
+	publisher->catch_notif(now_user->get_username() + " rate to your film");	
 }
 
 void System::buy()
@@ -116,6 +128,7 @@ void System::add_money_for_publisher(Film* now_film)
 	if(rate >= GOOD)
 		factor = GOOD_FACTOR;
 	publisher->update_money(factor * price);
+	publisher->catch_notif(now_user->get_username() + " buy your film"); //////////notif
 }
 
 Person* System::search_user_whith_id(int user_id)

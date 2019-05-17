@@ -57,6 +57,13 @@
 
 #define OK "ok"
 
+#define GOOD 8
+#define MEDIUM 5
+
+#define GOOD_FACTOR 0.95
+#define MEDIUM_FACTOR 0.90
+#define POOR_FACTOR 0.80
+
 using namespace std;
 
 struct Input

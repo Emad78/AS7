@@ -303,7 +303,24 @@ void System::get_metod()
 void System::published()
 {
 	check_user(true);
-	now_user->print_published(input);
+	vector<Film*> my_films seaerh_films_by_filters(now_user->get_my_films());
+}
+
+vector<Film*> System::seaerh_films_by_filters(vector<Film*> source)
+{
+	vector<Film*> searched = source;
+	if(input.info[NAME] != "")
+		searched = filter_by_name(searched, input.info[NAME]);	
+	if(input.info[MIN_RATE] != "")
+		searched = filter_by_min_rate(searched, stof(input.info[MIN_RATE]));
+	if(input.info[PRICE] != "")
+		searched = filter_by_price(searched, stoi(input.info[PRICE]));
+	if(input.info[MIN_YEAR] != "")
+		searched = filter_by_min_year(searched, stoi(input.info[MIN_YEAR]));
+	if(input.info[MAX_YEAR] != "")
+		searched = filter_by_max_year(searched, stoi(input.info[MAX_YEAR]));
+	if(input.info[DIRECTOR] != "")
+		searched = filter_by_director(searched, input.info[DIRECTOR]);			
 }
 
 void System::get_followers()

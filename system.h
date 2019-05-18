@@ -45,6 +45,7 @@ public:
 	void post_followers();
 	void send_reply(Film* now_film);
 	void send_reply_notif(int person_id);
+	Film* seaerh_films_by_filters(vector<Film*> source);
 	Film* check_film_for_publisher();
 	Person* search_user(string username);
 	Person* search_user_whith_id(int user_id);

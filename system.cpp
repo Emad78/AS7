@@ -333,7 +333,21 @@ vector<Film*> System::seaerh_films_by_filters(vector<Film*> source)
 		searched = filter_by_max_year(searched, stoi(input.info[MAX_YEAR]));
 	if(input.info[DIRECTOR] != "")
 		searched = filter_by_director(searched, input.info[DIRECTOR]);
+	sort_films_by_id(searched);
 	return searched;			
+}
+
+void System::sort_films_by_id(vector<Film*> &sorted)
+{
+	Film* temp;
+	for(int i = 0; i < sorted.size(); i++)
+		for(int j = i; j < sorted.size(); j++)
+			if(sorted[j]->get_id() < sorted[i]->get_id())
+			{
+				temp = sorted[i];
+				sorted[i] = sorted[j];
+				sorted[j] = temp;
+			}
 }
 
 vector<Film*> System::filter_by_name(vector<Film*> source, string name)

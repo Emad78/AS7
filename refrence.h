@@ -64,7 +64,7 @@
 #define MEDIUM_FACTOR 0.90
 #define POOR_FACTOR 0.80
 
-#define READ true
+#define _READ true
 #define NOT_READ false
 
 using namespace std;

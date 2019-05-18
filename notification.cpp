@@ -5,3 +5,8 @@ Notification::Notification(string _content)
 {
 	is_read = false;
 }
+
+void Notification::set_status()
+{
+	is_read = true;
+}

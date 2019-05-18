@@ -13,6 +13,7 @@ private:
 	bool is_read;
 public:
 	Notification(string _content);
+	void set_status();
 	~Notification();
 	
 };

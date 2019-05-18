@@ -128,10 +128,15 @@ int Film::get_year()
 	return year;
 }
 
+string Film::get_name()
+{
+	return name;
+}
 
-
-
-
+string Film::get_director()
+{
+	return director;
+}
 
 
 

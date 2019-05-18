@@ -15,3 +15,8 @@ bool Notification::get_status()
 {
 	return is_read;
 }
+
+string Notification::get_content()
+{
+	return content;
+}

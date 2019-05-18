@@ -14,6 +14,7 @@ private:
 public:
 	Notification(string _content);
 	void set_status();
+	bool get_status();
 	~Notification();
 	
 };

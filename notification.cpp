@@ -10,3 +10,8 @@ void Notification::set_status()
 {
 	is_read = true;
 }
+
+bool Notification::get_status()
+{
+	return is_read;
+}

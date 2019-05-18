@@ -29,6 +29,7 @@ public:
 	virtual void add_my_film(Film* new_film){};
 	string get_password();
 	void catch_notif(string content);
+	vector<Film*> get_bought_films();
 	virtual vector<Film*> get_my_films(){};
 	virtual	void inform_followers(){};
 	virtual	void add_follower(Person* follower){};

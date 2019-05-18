@@ -61,5 +61,8 @@ void Person::add_bought_film(Film* bought_film)
 	bought_films.push_back(bought_film);
 }
 
-
+vector<Film*> Person::get_bought_films()
+{
+	return bought_films;
+}
 

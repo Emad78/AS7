@@ -292,12 +292,19 @@ void System::get_metod()
 		get_films();
 	else if(re == PURCHASED)
 		purchased();
-/*	else if(re == NOTIFICATIONS)
+	else if(re == NOTIFICATIONS)
 		notifications();
-	else if(re == NOTIFICATIONSREAD)
-		notificationsread();
+/*	else if(re == NOTIFICATIONSREAD)
+		notifications_read();
 */	else 
 		throw Bad_request();
+}
+
+void System::notifications()
+{
+	if(now_user == NULL)
+		throw Permission_denied();
+	now_user->read(NOT_READ);	
 }
 
 void System::purchased()
@@ -333,7 +340,7 @@ void System::print_films(vector<Film*> printed)
 	cout<<"Rate"<<" | "<<"Production Year"<<" | ";
 	cout<<"Film Director"<<endl;
 	for(int i = 0; i < printed.size(); i++)
-		cout<<printed[i]<<endl;
+		cout<<to_string(i+1)<<". "<<printed[i]<<endl;
 
 }
 

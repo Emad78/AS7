@@ -39,15 +39,23 @@ int Publisher::catch_money()
 
 void Publisher::inform_followers()
 {
-	string content = get_username() + "send new film";
+	string notif = "Publisher ";
+	notif += info.username;
+	notif += " with id ";
+	notif += id;
+	notif += " register new film.";
 	for(int i = 0; i < followers.size(); i++)
-		followers[i]->catch_notif(content);
+		followers[i]->catch_notif(notif);
 }
 
 void Publisher::add_follower(Person* follower)
 {
-	string content = follower->get_username() + "follow you";  /////////notif
-	catch_notif(content);
+	string notif = "User ";
+	notif += follower->get_username();
+	notif += "with id ";
+	notif += follower->get_id();
+	notif += " follow you.";
+	catch_notif(notif);
 	followers.push_back(follower);
 }
 

@@ -99,7 +99,16 @@ void System::rate()
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
 	now_film->rating(stoi(input.info[SCORE]), now_user->get_id());
 	Person* publisher = search_user_whith_id(now_film->get_publisher_id());
-	publisher->catch_notif(now_user->get_username() + " rate to your film");   /////////////notif	
+	string notif = "user ";
+	notif += now_user->get_username(); 
+	notif += " with id "; 
+	notif += now_user->get_id();
+	notif += " rate yuor film ";
+	notif += now_film->get_name();
+	notif += " with id ";
+	notif += now_film->get_id();
+	notif += ".";
+	publisher->catch_notif(notif);	
 }
 
 void System::buy()
@@ -129,7 +138,16 @@ void System::add_money_for_publisher(Film* now_film)
 	if(rate >= GOOD)
 		factor = GOOD_FACTOR;
 	publisher->update_money(factor * price);
-	publisher->catch_notif(now_user->get_username() + " buy your film"); //////////notif
+	string notif = "User ";
+	notif += now_user->get_username();
+	notif += " with id ";
+	notif += now_user->get_id();
+	notif += " buy your film ";
+	notif += now_film->get_name();
+	notif += " with id ";
+	notif += now_film->get_id();
+	notif += ".";
+	publisher->catch_notif(notif); 
 }
 
 Person* System::search_user_whith_id(int user_id)
@@ -173,8 +191,12 @@ void System::send_reply(Film* now_film)
 
 void System::send_reply_notif(int person_id)
 {
-	string content = now_user->get_username() +"reply to you";    ///////////notif
-	users[person_id]->catch_notif(content); 
+	string notif = "Publisher ";
+	notif += now_user->get_username();
+	notif += " with id ";
+	notif += now_user->get_id();
+	notif += " reply to your comment.";
+	users[person_id]->catch_notif(notif); 
 }
 
 void System::post_money()
@@ -204,7 +226,7 @@ void System::post_films()
 	new_film = new Film(input, films.size() + 1, now_user->get_id());
 	films.push_back(new_film);
 	now_user->add_my_film(new_film);
-	now_user->inform_followers();    /////////notif
+	now_user->inform_followers();
 	cout<<OK<<endl;
 }
 

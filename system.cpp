@@ -303,7 +303,7 @@ void System::get_metod()
 void System::published()
 {
 	check_user(true);
-	vector<Film*> my_films seaerh_films_by_filters(now_user->get_my_films());
+	vector<Film*> my_films = seaerh_films_by_filters(now_user->get_my_films());
 	print_films(my_films);
 }
 

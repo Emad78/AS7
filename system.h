@@ -46,6 +46,12 @@ public:
 	void send_reply(Film* now_film);
 	void send_reply_notif(int person_id);
 	Film* seaerh_films_by_filters(vector<Film*> source);
+	Film* filter_by_min_year(vector<Film*> source, int min_year);
+	Film* filter_by_min_rate(vector<Film*> source, double min_rate);
+	Film* filter_by_max_year(vector<Film*> source, int max_year);
+	Film* filter_by_price(vector<Film*> source, int price);
+	Film* filter_by_name(vector<Film*> source, string name);
+	Film* filter_by_director(vector<Film*> source, string director);	
 	Film* check_film_for_publisher();
 	Person* search_user(string username);
 	Person* search_user_whith_id(int user_id);

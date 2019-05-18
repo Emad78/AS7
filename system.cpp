@@ -304,6 +304,18 @@ void System::published()
 {
 	check_user(true);
 	vector<Film*> my_films seaerh_films_by_filters(now_user->get_my_films());
+	print_films(my_films);
+}
+
+void System::print_films(vector<Film*> printed)
+{
+	cout<<"#. "<<"Film Id"<<" | "<<"Film Name"<<" | ";
+	cout<<"Film Length"<<" | "<<"Film Price"<<" | ";
+	cout<<"Rate"<<" | "<<"Production Year"<<" | ";
+	cout<<"Film Director"<<endl;
+	for(int i = 0; i < printed.size(); i++)
+		cout<<printed[i]<<endl;
+
 }
 
 vector<Film*> System::seaerh_films_by_filters(vector<Film*> source)
@@ -320,7 +332,68 @@ vector<Film*> System::seaerh_films_by_filters(vector<Film*> source)
 	if(input.info[MAX_YEAR] != "")
 		searched = filter_by_max_year(searched, stoi(input.info[MAX_YEAR]));
 	if(input.info[DIRECTOR] != "")
-		searched = filter_by_director(searched, input.info[DIRECTOR]);			
+		searched = filter_by_director(searched, input.info[DIRECTOR]);
+	return searched;			
+}
+
+vector<Film*> System::filter_by_name(vector<Film*> source, string name)
+{
+	vector<Film*> filtered;
+	filtered.clear();
+	for(int i = 0; i < source.size(); i++)
+		if(name == source[i]->get_name())
+			filtered.push_back(source[i]);
+	return filtered;
+}
+
+vector<Film*> System::filter_by_min_rate(vector<Film*> source, double min_rate)
+{
+	vector<Film*> filtered;
+	filtered.clear();
+	for(int i = 0; i < source.size(); i++)
+		if(min_rate <= source[i]->_rate())
+			filtered.push_back(source[i]);
+	return filtered;
+}
+
+vector<Film*> System::filter_by_price(vector<Film*> source, int price)
+{
+	vector<Film*> filtered;
+	filtered.clear();
+	for(int i = 0; i < source.size(); i++)
+		if(price == source[i]->get_price())
+			filtered.push_back(source[i]);
+	return filtered;
+}
+
+vector<Film*> System::filter_by_min_year(vector<Film*> source, int min_year)
+{
+	vector<Film*> filtered;
+	filtered.clear();
+	for(int i = 0; i < source.size(); i++)
+		if(min_year <= source[i]->get_year())
+			filtered.push_back(source[i]);
+	return filtered;
+}
+
+vector<Film*> System::filter_by_max_year(vector<Film*> source, int max_year)
+{
+	vector<Film*> filtered;
+	filtered.clear();
+	for(int i = 0; i < source.size(); i++)
+		if(max_year >= source[i]->get_year())
+			filtered.push_back(source[i]);
+	return filtered;
+}
+
+vector<Film*> System::filter_by_director(vector<Film*> source, string director)
+{
+	vector<Film*> filtered;
+	filtered.clear();
+	for(int i = 0; i < source.size(); i++)
+		if(director == source[i]->get_director())
+			filtered.push_back(source[i]);
+	return filtered;
 }
 
 void System::get_followers()

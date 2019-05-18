@@ -288,16 +288,35 @@ void System::get_metod()
 		get_followers();
 	else if(re == PUBLISHED)
 		published();
-/*	else if(re == FILMS)
+	else if(re == FILMS)
 		get_films();
 	else if(re == PURCHASED)
 		purchased();
-	else if(re == NOTIFICATIONS)
+/*	else if(re == NOTIFICATIONS)
 		notifications();
 	else if(re == NOTIFICATIONSREAD)
 		notificationsread();
 */	else 
 		throw Bad_request();
+}
+
+void System::purchased()
+{
+	if(now_user == NULL)
+		throw Permission_denied();
+		vector<Film*> searched = seaerh_films_by_filters(now_user->get_bought_films());
+		print_films(searched);	
+}
+
+void System::get_films()
+{
+	if(now_user == NULL)
+		throw Permission_denied();
+	if(input.info[FILM_ID] == "")
+	{
+		vector<Film*> searched = seaerh_films_by_filters(films);
+		print_films(searched);
+	}
 }
 
 void System::published()

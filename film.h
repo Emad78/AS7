@@ -21,6 +21,9 @@ public:
 	int get_publisher_id();
 	int get_price();
 	int get_id();
+	int get_year();
+	string get_name();
+	string get_director();
 	bool get_is_visible();
 	void _delete();
 	void delete_comment(Input input);

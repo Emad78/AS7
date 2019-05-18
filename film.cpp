@@ -123,7 +123,10 @@ void Film::rating(int score, int person_id)
 	rate.score.push_back(score);
 }
 
-
+int Film::get_year()
+{
+	return year;
+}
 
 
 

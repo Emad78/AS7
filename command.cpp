@@ -55,7 +55,10 @@ Input Command::get_input()
 	key = seprate_word(line);
 	if(input.request == NOTIFICATIONS)
 		if(key == READ)
+		{
+			key = seprate_word(line);
 			input.request = NOTIFICATIONS_READ;
+		}
 	while(line != "")
 	{
 		key = seprate_word(line);

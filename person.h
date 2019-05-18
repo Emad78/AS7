@@ -32,7 +32,6 @@ public:
 	virtual	void inform_followers(){};
 	virtual	void add_follower(Person* follower){};
 	virtual int catch_money() {};
-	virtual void print_published(Input input) {};
 	friend ostream& operator<<(ostream& out, Person* person);
 //	~Person();
 	

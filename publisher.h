@@ -17,7 +17,6 @@ public:
 	int catch_money();
 	void inform_followers();
 	void add_follower(Person* follower);
-	void print_published(Input input);
 	void add_my_film(Film* new_film);
 	~Publisher();
 	

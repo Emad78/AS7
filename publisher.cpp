@@ -37,13 +37,6 @@ int Publisher::catch_money()
 	return catching;
 }
 
-void Publisher::print_published(Input input)
-{
-	for(int i = 0; i < my_films.size(); i++)
-		if( my_films[i]->is_same_film(input))
-				cout<<to_string(i+1)<<my_films[i]<<endl;
-}
-
 void Publisher::inform_followers()
 {
 	string content = get_username() + "send new film";

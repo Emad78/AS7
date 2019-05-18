@@ -50,6 +50,7 @@ public:
 	void get_films();
 	void purchased();
 	void notifications();
+	void notifications_read();
 	vector<Film*> seaerh_films_by_filters(vector<Film*> source);
 	vector<Film*> filter_by_min_year(vector<Film*> source, int min_year);
 	vector<Film*> filter_by_min_rate(vector<Film*> source, double min_rate);

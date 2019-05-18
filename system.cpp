@@ -294,10 +294,17 @@ void System::get_metod()
 		purchased();
 	else if(re == NOTIFICATIONS)
 		notifications();
-/*	else if(re == NOTIFICATIONSREAD)
+	else if(re == NOTIFICATIONS_READ)
 		notifications_read();
-*/	else 
+	else 
 		throw Bad_request();
+}
+
+void System::notifications_read()
+{
+	if(now_user == NULL)
+		throw Permission_denied();
+	now_user->read(_READ);		
 }
 
 void System::notifications()

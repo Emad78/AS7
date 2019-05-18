@@ -16,6 +16,7 @@ public:
 	void print_followers();
 	int catch_money();
 	void inform_followers();
+	virtual vector<Film*> get_my_films();
 	void add_follower(Person* follower);
 	void add_my_film(Film* new_film);
 	~Publisher();

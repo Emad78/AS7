@@ -51,7 +51,10 @@ void Publisher::add_follower(Person* follower)
 	followers.push_back(follower);
 }
 
-
+vector<Film*> get_my_films()
+{
+	return my_films;
+}
 
 
 

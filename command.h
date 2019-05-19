@@ -15,6 +15,7 @@ public:
 	Command(string _line);
 	void set();
 	Input get_input();
+	void check_format();
 	string seprate_word(string &sentence,char delimiter);
 	friend class Person;
 	friend class System;

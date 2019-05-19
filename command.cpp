@@ -31,6 +31,37 @@ void Command::set()
 	input.info.insert({LIMIT, ""});	
 }
 
+void Command::check_format()
+{
+	if(input.info[PRICE] != "")
+		check_is_number(input.info[PRICE]);
+	if(input.info[MAX_YEAR] != "")
+		check_is_number(input.info[MAX_YEAR]);
+	if(input.info[MIN_YEAR] != "")
+		check_is_number(input.info[MIN_YEAR]);
+	if(input.info[MIN_RATE] != "")
+		check_is_number(input.info[MIN_RATE]);
+	if(input.info[YEAR] != "")
+		check_is_number(input.info[YEAR]);
+	if(input.info[LENGTH] != "")
+		check_is_number(input.info[LENGTH]);
+	if(input.info[AGE] != "")
+		check_is_number(input.info[AGE]);
+	if(input.info[FILM_ID] != "")
+		check_is_number(input.info[FILM_ID]);
+	if(input.info[COMMENT_ID] != "")
+		check_is_number(input.info[COMMENT_ID]);
+	if(input.info[USER_ID] != "")
+		check_is_number(input.info[USER_ID]);
+	if(input.info[AMOUNT] != "")
+		check_is_number(input.info[AMOUNT]);
+	if(input.info[SCORE] != "")
+		check_is_number(input.info[SCORE]);
+	if(input.info[LIMIT] != "")
+		check_is_number(input.info[LIMIT]);	
+}
+
+
 string Command::seprate_word(string &sentence,char delimiter = ' ')
 {
 	int line_index = 0;
@@ -71,4 +102,3 @@ Input Command::get_input()
 
 	return input;
 }
-

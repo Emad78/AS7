@@ -15,6 +15,7 @@ private:
 	vector<string> replies;
 public:
 	Comment(string _content, int _id, int _person_id);
+	bool get_is_visible();
 	int reply(Input input);
 	void _delete();
 	~Comment();

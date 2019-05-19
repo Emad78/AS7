@@ -15,3 +15,8 @@ void Comment::_delete()
 {
 	is_visible = false;
 }
+
+bool Comment::get_is_visible()
+{
+	return is_visible;
+}

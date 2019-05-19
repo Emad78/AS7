@@ -66,14 +66,21 @@ vector<Film*> Person::get_bought_films()
 	return bought_films;
 }
 
-void Person::read(bool notif_status)
+void Person::read(bool notif_status, int limit)
 {
 	int number = 1;
-	for(int i = 0; i < notifications.size(); i++)
+	if(limit == ALL)
+		limit = notifications.size();
+	for(int i = notifications.size() - 1; i >= 0; i--)
+	{
+		if(limit == 0)
+			return;
 		if(notif_status == notifications[i]->get_status())
 		{
+			limit--;
 			cout<<to_string(number)<<". "<<notifications[i]->get_content()<<endl;
 			notifications[i]->set_status();
 			number++;
 		}
+	}
 }

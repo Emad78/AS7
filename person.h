@@ -29,7 +29,7 @@ public:
 	virtual void add_my_film(Film* new_film){};
 	string get_password();
 	void catch_notif(string content);
-	void read(bool notif_status);
+	void read(bool notif_status, int limit);
 	vector<Film*> get_bought_films();
 	virtual vector<Film*> get_my_films(){};
 	virtual	void inform_followers(){};

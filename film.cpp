@@ -82,7 +82,7 @@ double Film::_rate()
 ostream& operator<<(ostream& out, Film* film)
 {
 	out<<film->id<<" | "<<film->name<<" | "<<film->length<<" | ";
-	out<<film->price<<" | "<<film->_rate()<<" | ";
+	out<<film->price<<" | "<<setprecision(2)<<film->_rate()<<" | ";
 	out<<film->year<<" | "<<film->director;
 	return out;
 }

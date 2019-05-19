@@ -1,7 +1,10 @@
 #include "coment.h"
 
-Comment::Comment()
-{}
+Comment::Comment(string _content, int _id, int _person_id)
+: content(_content), id(_id), person_id(_person_id), is_visible(true)
+{
+	replies.clear();
+}
 int Comment::reply(Input input)
 {
 	replies.push_back(input.info[CONTENT]);

@@ -66,7 +66,9 @@
 
 #define _READ true
 #define NOT_READ false
+
 #define ALL -1
+#define EXISTED -2
 
 using namespace std;
 

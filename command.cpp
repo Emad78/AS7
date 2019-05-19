@@ -58,9 +58,15 @@ void Command::check_format()
 	if(input.info[SCORE] != "")
 		check_is_number(input.info[SCORE]);
 	if(input.info[LIMIT] != "")
-		check_is_number(input.info[LIMIT]);	
+		check_is_number(input.info[LIMIT]); ////////check email	
 }
 
+void Command::check_is_number(string is_number)
+{
+	for(int i = 0; i < is_number.size(); i++)
+		if(is_number[i] < '0' || is_number[i] > '9')
+			throw Bad_request();
+}
 
 string Command::seprate_word(string &sentence,char delimiter = ' ')
 {

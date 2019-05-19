@@ -16,6 +16,7 @@ public:
 	void set();
 	Input get_input();
 	void check_format();
+	void check_is_number(string is_number);
 	string seprate_word(string &sentence,char delimiter);
 	friend class Person;
 	friend class System;

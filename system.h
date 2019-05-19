@@ -48,6 +48,7 @@ public:
 	void print_films(vector<Film*> printed);
 	void sort_films_by_id(vector<Film*> &sorted);
 	void get_films();
+	void post_comments();
 	void purchased();
 	void notifications();
 	void notifications_read();

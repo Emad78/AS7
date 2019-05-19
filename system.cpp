@@ -84,10 +84,32 @@ void System::post_metod()
 		buy();
 	else if(re == RATE)
 		rate();
-/*	else if(re == COMMENTS)
+	else if(re == COMMENTS)
 		post_comments();
-*/	else
+	else
 		throw Not_found();
+}
+
+void System::post_comments()
+{
+	if(now_user == NULL)
+		throw Permission_denied();
+	if(input.info[FILM_ID] == "" || input.info[CONTENT] == "")
+		throw Bad_request();	
+	Film* now_film = search_film(stoi(input.info[FILM_ID]));
+	if(now_film == NULL)
+		throw Not_found();
+	int publisher_id;
+	publisher_id = now_film->catch_comment(input.info[CONTENT], now_user->get_username(), now_user->get_id());
+	string notif = "User ";                    ///////////////////////notifs
+	notif += now_user->get_username();
+	notif += " with id";
+	notif += to_string(now_user->get_id());
+	notif += " comment on your film ";
+	notif += now_film->get_name();
+	notif += " with id ";
+	notif += to_string(now_film->get_id());
+	users[publisher_id]->catch_notif(notif);
 }
 
 void System::rate()
@@ -326,14 +348,14 @@ void System::notifications_read()
 {
 	if(now_user == NULL)
 		throw Permission_denied();
-	now_user->read(_READ);		
+	now_user->read(_READ, stoi(input.info[LIMIT]));		
 }
 
 void System::notifications()
 {
 	if(now_user == NULL)
 		throw Permission_denied();
-	now_user->read(NOT_READ);	
+	now_user->read(NOT_READ, ALL);	
 }
 
 void System::purchased()

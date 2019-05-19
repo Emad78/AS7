@@ -20,3 +20,11 @@ bool Comment::get_is_visible()
 {
 	return is_visible;
 }
+
+ostream& operator<<(ostream& out, Comment* comment)
+{
+	out<<comment->id<<". "<<comment->content<<endl;
+	for(int i = 0; i < comment->replies.size(); i++)
+		out<<comment->id<<"."<<i+1<<". "<<comment->replies[i]<<endl;
+
+}

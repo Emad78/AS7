@@ -19,6 +19,7 @@ public:
 	int reply(Input input);
 	void _delete();
 	~Comment();
+	friend ostream& operator<<(ostream& out, Comment* comment);
 };
 
 #endif

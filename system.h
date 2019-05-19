@@ -45,13 +45,14 @@ public:
 	void post_followers();
 	void send_reply(Film* now_film);
 	void send_reply_notif(int person_id);
-	void print_films(vector<Film*> printed);
+	void print_films(vector<Film*> printed, int status);
 	void sort_films_by_id(vector<Film*> &sorted);
 	void get_films();
 	void post_comments();
 	void purchased();
 	void notifications();
 	void notifications_read();
+	bool film_exist(Film* film);
 	vector<Film*> seaerh_films_by_filters(vector<Film*> source);
 	vector<Film*> filter_by_min_year(vector<Film*> source, int min_year);
 	vector<Film*> filter_by_min_rate(vector<Film*> source, double min_rate);

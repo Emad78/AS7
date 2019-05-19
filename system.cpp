@@ -97,6 +97,7 @@ void System::post_comments()
 	if(input.info[FILM_ID] == "" || input.info[CONTENT] == "")
 		throw Bad_request();	
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
+	film_exist(now_film);
 	if(now_film == NULL)
 		throw Not_found();
 	int publisher_id;
@@ -119,6 +120,7 @@ void System::rate()
 	if(input.info[FILM_ID] == "" || input.info[SCORE] == "")
 		throw Bad_request();
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
+	film_exist(now_film);
 	now_film->rating(stoi(input.info[SCORE]), now_user->get_id());
 	Person* publisher = search_user_whith_id(now_film->get_publisher_id());
 	string notif = "user ";
@@ -140,6 +142,7 @@ void System::buy()
 	if(input.info[FILM_ID] == "")
 		throw Bad_request();
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
+	film_exist(now_film);
 	if(now_user->get_money() < now_film->get_price())
 		throw Bad_request();
 	now_user->update_money((-1) * now_film->get_price());
@@ -201,6 +204,7 @@ void System::replies()
 	if(search_film(stoi(input.info[FILM_ID])) == NULL)
 		throw Not_found();
 	Film* now_film = check_film_for_publisher();
+	film_exist(now_film);
 	send_reply(now_film); 
 	cout<<OK<<endl;
 }
@@ -312,7 +316,8 @@ void System::put_films()
 	check_user(true);
 	if(search_film(stoi(input.info[FILM_ID])) == NULL)
 		throw Not_found();
-	Film* now_film = check_film_for_publisher(); 
+	Film* now_film = check_film_for_publisher();
+	film_exist(now_film); 
 	now_film->edit(input);
 	cout<<OK<<endl;
 }
@@ -363,7 +368,7 @@ void System::purchased()
 	if(now_user == NULL)
 		throw Permission_denied();
 		vector<Film*> searched = seaerh_films_by_filters(now_user->get_bought_films());
-		print_films(searched);	
+		print_films(searched, ALL);	
 }
 
 void System::get_films()
@@ -373,7 +378,7 @@ void System::get_films()
 	if(input.info[FILM_ID] == "")
 	{
 		vector<Film*> searched = seaerh_films_by_filters(films);
-		print_films(searched);
+		print_films(searched, EXISTED);
 	}
 }
 
@@ -381,17 +386,23 @@ void System::published()
 {
 	check_user(true);
 	vector<Film*> my_films = seaerh_films_by_filters(now_user->get_my_films());
-	print_films(my_films);
+	print_films(my_films, EXISTED);
 }
 
-void System::print_films(vector<Film*> printed)
+void System::print_films(vector<Film*> printed, int status)
 {
 	cout<<"#. "<<"Film Id"<<" | "<<"Film Name"<<" | ";
 	cout<<"Film Length"<<" | "<<"Film Price"<<" | ";
 	cout<<"Rate"<<" | "<<"Production Year"<<" | ";
 	cout<<"Film Director"<<endl;
+	int number = 1;
 	for(int i = 0; i < printed.size(); i++)
-		cout<<to_string(i+1)<<". "<<printed[i]<<endl;
+	{
+		if(status  == EXISTED && !printed[i]->get_is_visible())
+			continue;
+		cout<<to_string(number)<<". "<<printed[i]<<endl;
+		number++;
+	}
 
 }
 
@@ -511,6 +522,7 @@ void System::delete_comments()
 		throw Bad_request();
 	Film* now_film;
 	now_film = check_film_for_publisher();
+	film_exist(now_film);
 	now_film->delete_comment(input);
 	cout<<OK<<endl;
 }
@@ -534,4 +546,11 @@ void System::check_user(bool is_publisher)
 		throw Permission_denied();		
 	if(now_user->get_is_publisher() != is_publisher)
 		throw Permission_denied();
+}
+
+bool System::film_exist(Film* film)
+{
+	if(film->get_is_visible() == false)
+		throw Not_found();
+	return true;
 }

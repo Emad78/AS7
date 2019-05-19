@@ -102,11 +102,11 @@ void System::rate()
 	string notif = "user ";
 	notif += now_user->get_username(); 
 	notif += " with id "; 
-	notif += now_user->get_id();
+	notif += to_string(now_user->get_id());
 	notif += " rate yuor film ";
 	notif += now_film->get_name();
 	notif += " with id ";
-	notif += now_film->get_id();
+	notif += to_string(now_film->get_id());
 	notif += ".";
 	publisher->catch_notif(notif);	
 }
@@ -141,11 +141,11 @@ void System::add_money_for_publisher(Film* now_film)
 	string notif = "User ";
 	notif += now_user->get_username();
 	notif += " with id ";
-	notif += now_user->get_id();
+	notif += to_string(now_user->get_id());
 	notif += " buy your film ";
 	notif += now_film->get_name();
 	notif += " with id ";
-	notif += now_film->get_id();
+	notif += to_string(now_film->get_id());
 	notif += ".";
 	publisher->catch_notif(notif); 
 }
@@ -194,7 +194,7 @@ void System::send_reply_notif(int person_id)
 	string notif = "Publisher ";
 	notif += now_user->get_username();
 	notif += " with id ";
-	notif += now_user->get_id();
+	notif += to_string(now_user->get_id());
 	notif += " reply to your comment.";
 	users[person_id]->catch_notif(notif); 
 }

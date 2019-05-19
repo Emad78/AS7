@@ -145,3 +145,23 @@ int Film::catch_comment(string content, string name, int id)
 	return publisher_id - 1;
 }
 
+void Film::print_details()
+{
+	cout<<"Details of Film "<<name<<endl;
+	cout<<"Id = "<<id<<endl;
+	cout<<"Director = "<<director<<endl;
+	cout<<"Length = "<<length<<endl;
+	cout<<"Year = "<<year<<endl;
+	cout<<"Summary = "<<summary<<endl;
+	cout<<"Rate = "<<setprecision(2)<<rate<<endl;
+	cout"Price = "<<price<<endl;
+}
+
+
+
+
+
+
+
+
+

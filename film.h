@@ -27,8 +27,8 @@ public:
 	bool get_is_visible();
 	int catch_comment(string content, string name, int id);
 	void _delete();
-	void print_details();
-	void print_comments();
+	void print_details(); 
+	void print_comments(); 
 	void delete_comment(Input input);
 	double _rate();
 	void rating(int score, int person_id);

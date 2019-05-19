@@ -380,6 +380,14 @@ void System::get_films()
 		vector<Film*> searched = seaerh_films_by_filters(films);
 		print_films(searched, EXISTED);
 	}
+	else
+	{
+		Film* now_film = search_film(stoi(input.info[FILM_ID]));
+		film_exist(now_film);
+		now_film->print_details();
+		now_film->print_comments();
+		/////recommend
+	}
 }
 
 void System::published()

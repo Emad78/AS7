@@ -138,5 +138,10 @@ string Film::get_director()
 	return director;
 }
 
-
+int Film::catch_comment(string content, string name, int id)
+{
+	Comment* new_comment = new Comment(content, comments.size() + 1, id);
+	comments.push_back(new_comment);
+	return publisher_id - 1;
+}
 

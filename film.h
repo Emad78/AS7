@@ -25,6 +25,7 @@ public:
 	string get_name();
 	string get_director();
 	bool get_is_visible();
+	int catch_comment(string content, string name, int id);
 	void _delete();
 	void delete_comment(Input input);
 	double _rate();

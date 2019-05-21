@@ -17,7 +17,9 @@ private:
 	bool is_visible;
 public:
 	Film(Input input, int _id, int _publisher_id);
+	Film();
 	void edit(Input input);
+	void print(int number);
 	int get_publisher_id();
 	int get_price();
 	int get_id();

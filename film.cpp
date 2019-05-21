@@ -1,5 +1,12 @@
 #include "film.h"
 
+Film::Film()
+{
+	rate.score.clear();
+	rate.user_id.clear();	
+	is_visible = false;
+}
+
 Film::Film(Input input, int _id, int _publisher_id)
 {
 	id = _id;
@@ -73,9 +80,11 @@ bool Film::is_same_film(Input input)
 
 double Film::_rate()
 {
-	double avg=0;
+	double avg = 0;
 	for(int i = 0; i < rate.score.size(); i++)
 		avg += rate.score[i];
+	if(rate.score.size() == 0)
+		return 0;
 	return (avg / rate.score.size()); 
 }
 
@@ -165,7 +174,10 @@ void Film::print_comments()
 			cout<<comments[i];
 }
 
-
+void Film::print(int number)
+{
+	cout<<number<<". "<<id<<" | "<<name<<" | "<<length<<" | "<<director<<endl;
+}
 
 
 

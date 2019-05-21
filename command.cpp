@@ -58,7 +58,7 @@ void Command::check_format()
 	if(input.info[SCORE] != "")
 		check_is_number(input.info[SCORE]);
 	if(input.info[LIMIT] != "")
-		check_is_number(input.info[LIMIT]); ////////check email	
+		check_is_number(input.info[LIMIT]); 
 }
 
 void Command::check_is_number(string is_number)
@@ -100,7 +100,7 @@ Input Command::get_input()
 	{
 		key = seprate_word(line);
 		value = seprate_word(line);
-		input.info[key] = value;        //hashing
+		input.info[key] = value;
 	}
 	check_format();
 	return input;

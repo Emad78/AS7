@@ -63,7 +63,3 @@ vector<Film*> Publisher::get_my_films()
 {
 	return my_films;
 }
-
-
-
-

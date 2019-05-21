@@ -102,9 +102,6 @@ Input Command::get_input()
 		value = seprate_word(line);
 		input.info[key] = value;        //hashing
 	}
-	cout<<"metod: "<< input.metod<<endl;
-	cout<<"request: "<< input.request<<endl;
-	cout<<"id: "<< input.info[FILM_ID]<<endl;
-
+	check_format();
 	return input;
 }

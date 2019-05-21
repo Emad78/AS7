@@ -31,8 +31,16 @@ void Command::set()
 	input.info.insert({LIMIT, ""});	
 }
 
+void Command::check_email(string email) {
+    const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+        if(!regex_match(email, pattern))
+        	throw Bad_request();
+}
+
 void Command::check_format()
 {
+	if(input.info[EMAIL] != "")
+		check_email(input.info[EMAIL]);
 	if(input.info[PRICE] != "")
 		check_is_number(input.info[PRICE]);
 	if(input.info[MAX_YEAR] != "")

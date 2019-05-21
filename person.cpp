@@ -71,6 +71,7 @@ void Person::read(bool notif_status, int limit)
 	int number = 1;
 	if(limit == ALL)
 		limit = notifications.size();
+	cout<<"#. Notification Message"<<endl;
 	for(int i = notifications.size() - 1; i >= 0; i--)
 	{
 		if(limit == 0)
@@ -83,4 +84,12 @@ void Person::read(bool notif_status, int limit)
 			number++;
 		}
 	}
+}
+
+void Person::search_bought_film(int _id)
+{
+	for(int i = 0; i < bought_films.size(); i++)
+		if(_id == bought_films[i]->get_id())
+			return;
+		throw Permission_denied();
 }

@@ -24,6 +24,7 @@ public:
 	bool get_is_publisher();
 	void update_money(int new_money);
 	void add_bought_film(Film* bought_film);
+	void search_bought_film(int _id);
 	virtual Film* search_my_film(int _id){};
 	virtual void print_followers() {};
 	virtual void add_my_film(Film* new_film){};

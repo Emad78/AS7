@@ -26,7 +26,7 @@ void Publisher::print_followers()
 	cout<<"List of Followers"<<endl;
 	cout<<"#. User Id"<<" | "<<"User Username"<<" | "<<"User Email"<<endl;
 	for(int i = 0; i < followers.size(); i++)
-		cout<<to_string(i)<<". "<<followers[i]<<endl;
+		cout<<to_string(i + 1)<<". "<<followers[i]<<endl;
 }
 
 int Publisher::catch_money()

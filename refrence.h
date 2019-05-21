@@ -7,6 +7,7 @@
 #include <map>
 #include <iomanip>
 #include <algorithm>
+#include <regex>
 
 #define USERNAME "username"
 #define PASSWORD "password"

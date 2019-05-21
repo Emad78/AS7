@@ -6,6 +6,7 @@
 #include <vector>
 #include <map>
 #include <iomanip>
+#include <algorithm>
 
 #define USERNAME "username"
 #define PASSWORD "password"
@@ -25,7 +26,7 @@
 #define MIN_YEAR "min_year"
 #define MIN_RATE "min_rate"
 
-#define COMMENT_ID "coment_id"
+#define COMMENT_ID "comment_id"
 #define CONTENT "content"
 
 #define USER_ID "user_id"
@@ -56,7 +57,7 @@
 #define READ "read"
 #define NOTIFICATIONS_READ "notificationsread"
 
-#define OK "ok"
+#define OK "OK"
 
 #define GOOD 8
 #define MEDIUM 5
@@ -70,6 +71,8 @@
 
 #define ALL -1
 #define EXISTED -2
+
+#define MIN -1
 
 using namespace std;
 

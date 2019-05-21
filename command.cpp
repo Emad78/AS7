@@ -1,35 +1,8 @@
 #include "command.h"
 
 Command::Command(string _line)
-{
-	set();
-	line = _line;
-}
-
-void Command::set()
-{
-	input.info.insert({NAME, ""});
-	input.info.insert({PRICE, ""});
-	input.info.insert({DIRECTOR, ""});
-	input.info.insert({MAX_YEAR, ""});
-	input.info.insert({MIN_YEAR, ""});
-	input.info.insert({MIN_RATE, ""});
-	input.info.insert({YEAR, ""});
-	input.info.insert({LENGTH, ""});
-	input.info.insert({SUMMARY, ""});
-	input.info.insert({USERNAME, ""});
-	input.info.insert({PASSWORD, ""});
-	input.info.insert({AGE, ""});
-	input.info.insert({EMAIL, ""});
-	input.info.insert({PUBLISHER, ""});
-	input.info.insert({FILM_ID, ""});
-	input.info.insert({COMMENT_ID, ""});
-	input.info.insert({CONTENT, ""});
-	input.info.insert({USER_ID, ""});
-	input.info.insert({AMOUNT, ""});
-	input.info.insert({SCORE, ""});
-	input.info.insert({LIMIT, ""});	
-}
+: line(_line)
+{}
 
 void Command::check_email(string email) {
     const regex pattern("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
@@ -93,7 +66,6 @@ string Command::seprate_word(string &sentence,char delimiter = ' ')
 
 Input Command::get_input()
 {
-	set();
 	input.metod = seprate_word(line);
 	input.request = seprate_word(line);
 	string key, value;

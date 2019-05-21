@@ -13,7 +13,6 @@ private:
 	string line;
 public:
 	Command(string _line);
-	void set();
 	Input get_input();
 	void check_format();
 	void check_email(string email);

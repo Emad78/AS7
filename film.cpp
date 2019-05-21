@@ -178,9 +178,3 @@ void Film::print(int number)
 {
 	cout<<number<<". "<<id<<" | "<<name<<" | "<<length<<" | "<<director<<endl;
 }
-
-
-
-
-
-

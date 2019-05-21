@@ -103,8 +103,9 @@ void System::post_comments()
 	if(now_film == NULL)
 		throw Not_found();
 	int publisher_id;
+	now_user->search_bought_film(now_film->get_id());	
 	publisher_id = now_film->catch_comment(input.info[CONTENT], now_user->get_username(), now_user->get_id());
-	string notif = "User ";                    ///////////////////////notifs
+	string notif = "User ";
 	notif += now_user->get_username();
 	notif += " with id ";
 	notif += to_string(now_user->get_id());
@@ -151,7 +152,7 @@ void System::buy()
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
 	film_exist(now_film);
 	if(now_user->get_money() < now_film->get_price())
-		throw Bad_request();
+		throw Permission_denied();
 	now_user->update_money((-1) * now_film->get_price());
 	now_user->add_bought_film(now_film);
 	add_money_for_publisher(now_film);
@@ -197,7 +198,7 @@ void System::post_followers()
 		throw Permission_denied();
 	if(input.info[USER_ID] == "")
 		throw Bad_request();
-	if(!users[stoi(input.info[USER_ID]) - 1]->get_is_publisher())
+	if(!users[stoi(input.info[USER_ID]) - 1]->get_is_publisher() || stoi(input.info[USER_ID]) > users.size())
 		throw Bad_request();
 	users[stoi(input.info[USER_ID]) - 1]->add_follower(now_user);
 	cout<<OK<<endl;
@@ -416,6 +417,8 @@ void System::print_recomend(int id)
 		try
 		{
 			film_exist(printed);
+			if(printed->get_publisher_id() == now_user->get_id())
+				throw Bad_request();
 		}catch(exception&)
 		{
 			copy_rates.erase(copy_rates.begin() + max_index);

@@ -14,7 +14,7 @@ protected:
 	Info info;
 	int id;
 	vector<Notification*> notifications;
-	vector<Film*> bought_films;  // pointer or not
+	vector<Film*> bought_films;
 	int money;
 public:
 	Person(Input input, int _id);
@@ -37,8 +37,6 @@ public:
 	virtual	void add_follower(Person* follower){};
 	virtual int catch_money() {};
 	friend ostream& operator<<(ostream& out, Person* person);
-//	~Person();
-	
 };
 
 #endif

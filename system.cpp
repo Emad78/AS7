@@ -5,6 +5,7 @@ System::System()
 	money = 0;
 	users.clear();
 	now_user = NULL;	
+	Film* empty = new Film();
 }
 
 System::~System()
@@ -20,11 +21,12 @@ System::~System()
 void System::run()
 {
 	string line;
-	while(true)
+	while(getline(cin, line))
 	{
 		try
 		{
-			getline(cin, line);
+			if(line == "")
+				continue;
 			command = new Command(line);
 			input = command->get_input();
 			process();
@@ -104,13 +106,15 @@ void System::post_comments()
 	publisher_id = now_film->catch_comment(input.info[CONTENT], now_user->get_username(), now_user->get_id());
 	string notif = "User ";                    ///////////////////////notifs
 	notif += now_user->get_username();
-	notif += " with id";
+	notif += " with id ";
 	notif += to_string(now_user->get_id());
 	notif += " comment on your film ";
 	notif += now_film->get_name();
 	notif += " with id ";
 	notif += to_string(now_film->get_id());
+	notif += ".";
 	users[publisher_id]->catch_notif(notif);
+	cout<<OK<<endl;
 }
 
 void System::rate()
@@ -121,18 +125,21 @@ void System::rate()
 		throw Bad_request();
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
 	film_exist(now_film);
+	now_user->search_bought_film(now_film->get_id());
 	now_film->rating(stoi(input.info[SCORE]), now_user->get_id());
 	Person* publisher = search_user_whith_id(now_film->get_publisher_id());
-	string notif = "user ";
+	string notif = "User ";
 	notif += now_user->get_username(); 
 	notif += " with id "; 
 	notif += to_string(now_user->get_id());
-	notif += " rate yuor film ";
+	notif += " rate your film ";
 	notif += now_film->get_name();
 	notif += " with id ";
 	notif += to_string(now_film->get_id());
 	notif += ".";
-	publisher->catch_notif(notif);	
+	publisher->catch_notif(notif);
+	rates[now_film->get_id() - 1] = now_film->_rate();	
+	cout<<OK<<endl;
 }
 
 void System::buy()
@@ -149,6 +156,7 @@ void System::buy()
 	now_user->add_bought_film(now_film);
 	add_money_for_publisher(now_film);
 	money = now_film->get_price();
+	cout<<OK<<endl;
 }
 
 void System::add_money_for_publisher(Film* now_film)
@@ -222,7 +230,7 @@ void System::send_reply_notif(int person_id)
 	notif += " with id ";
 	notif += to_string(now_user->get_id());
 	notif += " reply to your comment.";
-	users[person_id]->catch_notif(notif); 
+	users[person_id - 1]->catch_notif(notif); 
 }
 
 void System::post_money()
@@ -253,6 +261,8 @@ void System::post_films()
 	films.push_back(new_film);
 	now_user->add_my_film(new_film);
 	now_user->inform_followers();
+	rates.push_back(0);
+	number.push_back(new_film->get_id());
 	cout<<OK<<endl;
 }
 
@@ -283,10 +293,9 @@ void System::login()
 		throw Bad_request();
 	if(new_user->get_password() != input.info[PASSWORD])
 	{
-		delete new_user;
 		throw Bad_request();		
 	}
-	now_user = new_user;
+	now_user = new_user;	
 	cout<<OK<<endl;
 }
 
@@ -307,7 +316,7 @@ Film* System::check_film_for_publisher()
 		throw Permission_denied();
 	}
 	if(now_film->get_is_visible() == false)
-		throw Bad_request();
+		throw Not_found();
 	return now_film;	
 }
 
@@ -386,7 +395,37 @@ void System::get_films()
 		film_exist(now_film);
 		now_film->print_details();
 		now_film->print_comments();
-		/////recommend
+		print_recomend(now_film->get_id());
+	}
+}
+
+void System::print_recomend(int id)
+{
+	Film* printed;
+	vector<double> copy_rates = rates;
+	vector<int> num = number;
+	copy_rates.erase(copy_rates.begin() + id -1);
+	num.erase(num.begin() + id - 1);
+	int number = 0, max, max_index;
+	cout<<"Recommendation Film"<<endl;
+	cout<<"#. Film Id | Film Name | Film Length | Film Director"<<endl;
+	while(number < 4 && copy_rates.size() != 0)
+	{
+		max_index = max_element(copy_rates.begin(), copy_rates.end()) - copy_rates.begin();;
+		printed = search_film(num[max_index]);
+		try
+		{
+			film_exist(printed);
+		}catch(exception&)
+		{
+			copy_rates.erase(copy_rates.begin() + max_index);
+			num.erase(num.begin() + max_index);
+			continue;
+		}
+		copy_rates.erase(copy_rates.begin() + max_index);
+		num.erase(num.begin() + max_index);
+		number++;
+		printed->print(number);
 	}
 }
 
@@ -400,7 +439,7 @@ void System::published()
 void System::print_films(vector<Film*> printed, int status)
 {
 	cout<<"#. "<<"Film Id"<<" | "<<"Film Name"<<" | ";
-	cout<<"Film Length"<<" | "<<"Film Price"<<" | ";
+	cout<<"Film Length"<<" | "<<"Film price"<<" | ";
 	cout<<"Rate"<<" | "<<"Production Year"<<" | ";
 	cout<<"Film Director"<<endl;
 	int number = 1;

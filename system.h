@@ -14,6 +14,8 @@ class System
 {
 private:
 	vector<Film*> films;
+	vector<double> rates;
+	vector<int> number;	
 	vector<Person*> users;
 	int money;
 	Command* command;
@@ -48,6 +50,7 @@ public:
 	void print_films(vector<Film*> printed, int status);
 	void sort_films_by_id(vector<Film*> &sorted);
 	void get_films();
+	void print_recomend(int id);
 	void post_comments();
 	void purchased();
 	void notifications();

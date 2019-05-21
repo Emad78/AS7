@@ -5,7 +5,6 @@ System::System()
 	money = 0;
 	users.clear();
 	now_user = NULL;	
-	Film* empty = new Film();
 }
 
 System::~System()
@@ -30,12 +29,11 @@ void System::run()
 			command = new Command(line);
 			input = command->get_input();
 			process();
-			delete command;
-
 		}catch(exception& ex)
 		{
 			cout<<ex.what()<<endl;
 		}
+		delete command;
 	}
 }
 
@@ -94,8 +92,7 @@ void System::post_metod()
 
 void System::post_comments()
 {
-	if(now_user == NULL)
-		throw Permission_denied();
+	user_exist();
 	if(input.info[FILM_ID] == "" || input.info[CONTENT] == "")
 		throw Bad_request();	
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
@@ -120,8 +117,7 @@ void System::post_comments()
 
 void System::rate()
 {
-	if(now_user == NULL)
-		throw Permission_denied();
+	user_exist();
 	if(input.info[FILM_ID] == "" || input.info[SCORE] == "")
 		throw Bad_request();
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
@@ -145,8 +141,7 @@ void System::rate()
 
 void System::buy()
 {
-	if(now_user == NULL)
-		throw Permission_denied();
+	user_exist();
 	if(input.info[FILM_ID] == "")
 		throw Bad_request();
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
@@ -194,8 +189,7 @@ Person* System::search_user_whith_id(int user_id)
 
 void System::post_followers()
 {
-	if(now_user == NULL)
-		throw Permission_denied();
+	user_exist();
 	if(input.info[USER_ID] == "")
 		throw Bad_request();
 	if(!users[stoi(input.info[USER_ID]) - 1]->get_is_publisher() || stoi(input.info[USER_ID]) > users.size())
@@ -243,8 +237,7 @@ void System::post_money()
 	}
 	else
 	{
-		if(now_user == NULL)
-			throw Permission_denied();
+		user_exist();
 		now_user->update_money(stoi(input.info[AMOUNT]));
 	}
 	cout<<OK<<endl;
@@ -361,15 +354,13 @@ void System::get_metod()
 
 void System::notifications_read()
 {
-	if(now_user == NULL)
-		throw Permission_denied();
+	user_exist();
 	now_user->read(_READ, stoi(input.info[LIMIT]));		
 }
 
 void System::notifications()
 {
-	if(now_user == NULL)
-		throw Permission_denied();
+	user_exist();
 	now_user->read(NOT_READ, ALL);	
 }
 
@@ -383,8 +374,7 @@ void System::purchased()
 
 void System::get_films()
 {
-	if(now_user == NULL)
-		throw Permission_denied();
+	user_exist();
 	if(input.info[FILM_ID] == "")
 	{
 		vector<Film*> searched = seaerh_films_by_filters(films);
@@ -592,8 +582,7 @@ void System::delete_films()
 
 void System::check_user(bool is_publisher)
 {
-	if(now_user == NULL)
-		throw Permission_denied();		
+	user_exist();
 	if(now_user->get_is_publisher() != is_publisher)
 		throw Permission_denied();
 }
@@ -603,4 +592,10 @@ bool System::film_exist(Film* film)
 	if(film->get_is_visible() == false)
 		throw Not_found();
 	return true;
+}
+
+void System::user_exist()
+{
+	if(now_user == NULL)
+		throw Permission_denied();			
 }

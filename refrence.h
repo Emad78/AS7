@@ -15,6 +15,8 @@
 #define EMAIL "email"
 #define PUBLISHER "publisher"
 
+#define ADMIN "admin"
+
 #define NAME "name"
 #define YEAR "year"
 #define LENGTH "length"

@@ -26,7 +26,6 @@ public:
 	void run();
 	void process();
 	void metod_detect();
-	void put_metod();
 	void post_metod();
 	void get_metod();
 	void delete_metod();

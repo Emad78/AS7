@@ -53,9 +53,7 @@ Person* System::search_user(string username)
 void System::metod_detect()
 {
 	string metod = input.metod;
-	if(metod == PUT)
-		put_metod();
-	else if(metod == POST)
+	if(metod == POST)
 		post_metod();
 	else if(metod == GET)
 		get_metod();
@@ -86,9 +84,23 @@ void System::post_metod()
 		rate();
 	else if(re == COMMENTS)
 		post_comments();
+	else if(re == PUT_FILMS)
+		put_films();	
 	else
 		throw Not_found();
 }
+
+void System::put_films()
+{
+	check_user(true);
+	if(search_film(stoi(input.info[FILM_ID])) == NULL)
+		throw Not_found();
+	Film* now_film = check_film_for_publisher();
+	film_exist(now_film); 
+	now_film->edit(input);
+	cout<<OK<<endl;
+}
+
 
 void System::post_comments()
 {
@@ -293,14 +305,6 @@ void System::login()
 	cout<<OK<<endl;
 }
 
-void System::put_metod()
-{
-	if(input.request == FILMS)
-		put_films();
-	else
-		throw Not_found();
-}
-
 Film* System::check_film_for_publisher()
 {
 	Film* now_film = now_user->search_my_film(stoi(input.info[FILM_ID])); 
@@ -312,17 +316,6 @@ Film* System::check_film_for_publisher()
 	if(now_film->get_is_visible() == false)
 		throw Not_found();
 	return now_film;	
-}
-
-void System::put_films()
-{
-	check_user(true);
-	if(search_film(stoi(input.info[FILM_ID])) == NULL)
-		throw Not_found();
-	Film* now_film = check_film_for_publisher();
-	film_exist(now_film); 
-	now_film->edit(input);
-	cout<<OK<<endl;
 }
 
 Film* System::search_film(int film_id)

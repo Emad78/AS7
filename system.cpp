@@ -86,6 +86,8 @@ void System::post_metod()
 		post_comments();
 	else if(re == PUT_FILMS)
 		put_films();	
+	else if(re == DELETE_FILMS)
+		delete_films();		
 	else
 		throw Not_found();
 }
@@ -540,9 +542,7 @@ void System::get_followers()
 void System::delete_metod()
 {
 	string re = input.request;
-	if(re == FILMS)
-		delete_films();
-	else if(re == COMMENTS)
+	if(re == COMMENTS)
 		delete_comments();
 	else 
 		throw Bad_request();

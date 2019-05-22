@@ -57,8 +57,6 @@ void System::metod_detect()
 		post_metod();
 	else if(metod == GET)
 		get_metod();
-	else if(metod == DELETE)
-		delete_metod();
 	else
 		throw Bad_request();
 }
@@ -87,7 +85,9 @@ void System::post_metod()
 	else if(re == PUT_FILMS)
 		put_films();	
 	else if(re == DELETE_FILMS)
-		delete_films();		
+		delete_films();
+	else if(re == DELETE_COMMENTS)
+		delete_comments();				
 	else
 		throw Not_found();
 }
@@ -537,15 +537,6 @@ void System::get_followers()
 {
 	check_user(true);
 	now_user->print_followers();
-}
-
-void System::delete_metod()
-{
-	string re = input.request;
-	if(re == COMMENTS)
-		delete_comments();
-	else 
-		throw Bad_request();
 }
 
 void System::delete_comments()

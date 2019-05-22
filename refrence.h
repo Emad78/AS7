@@ -57,6 +57,7 @@
 #define NOTIFICATIONS "notifications"
 #define READ "read"
 #define NOTIFICATIONS_READ "notificationsread"
+#define PUT_FILMS "put_films"
 
 #define OK "OK"
 

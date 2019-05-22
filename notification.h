@@ -16,8 +16,6 @@ public:
 	void set_status();
 	bool get_status();
 	string get_content();
-	~Notification();
-	
 };
 
 #endif

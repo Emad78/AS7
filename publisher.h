@@ -19,8 +19,6 @@ public:
 	virtual vector<Film*> get_my_films();
 	void add_follower(Person* follower);
 	void add_my_film(Film* new_film);
-	~Publisher();
-	
 };
 
 #endif

@@ -49,6 +49,7 @@ public:
 	void print_films(vector<Film*> printed, int status);
 	void sort_films_by_id(vector<Film*> &sorted);
 	void get_films();
+	void get_money();
 	void print_recomend(int id);
 	void post_comments();
 	void purchased();

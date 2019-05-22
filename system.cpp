@@ -357,8 +357,18 @@ void System::get_metod()
 		notifications();
 	else if(re == NOTIFICATIONS_READ)
 		notifications_read();
+	else if(re == MONEY)
+		get_money();
 	else 
 		throw Bad_request();
+}
+
+void System::get_money()
+{
+	user_exist();
+	if(now_user->get_username() != ADMIN)
+		cout<<now_user->get_money()<<endl;
+
 }
 
 void System::notifications_read()

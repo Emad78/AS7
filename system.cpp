@@ -368,7 +368,8 @@ void System::get_money()
 	user_exist();
 	if(now_user->get_username() != ADMIN)
 		cout<<now_user->get_money()<<endl;
-
+	if(now_user->get_username() == ADMIN)
+		cout<<money<<endl;
 }
 
 void System::notifications_read()

@@ -33,6 +33,7 @@ public:
 	void add_money_for_publisher(Film* now_film);
 	void signup();
 	void login();
+	void logout();
 	void post_films();
 	void put_films();
 	void delete_films();

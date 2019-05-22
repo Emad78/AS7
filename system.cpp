@@ -68,6 +68,8 @@ void System::post_metod()
 		login();
 	else if(re == SIGNUP)
 		signup();
+	else if(re == LOGOUT)
+		logout();
 	else if(re == FILMS)
 		post_films();
 	else if(re == MONEY)
@@ -276,6 +278,8 @@ void System::post_films()
 
 void System::signup()
 {
+	if(now_user != NULL)
+		throw Bad_request();
 	if(input.info[USERNAME] == "" || input.info[PASSWORD] == ""
 		|| input.info[EMAIL] == "" || input.info[AGE] == "")
 		throw Bad_request();
@@ -293,6 +297,8 @@ void System::signup()
 
 void System::login()
 {
+	if(now_user != NULL)
+		throw Bad_request();	
 	if(input.info[USERNAME] == "" || input.info[PASSWORD] == "")
 		throw Bad_request();
 	Person* new_user;
@@ -304,6 +310,14 @@ void System::login()
 		throw Bad_request();		
 	}
 	now_user = new_user;	
+	cout<<OK<<endl;
+}
+
+void System::logout()
+{
+	if(now_user == NULL)
+		throw Bad_request();
+	now_user = NULL;
 	cout<<OK<<endl;
 }
 

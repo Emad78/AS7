@@ -45,6 +45,7 @@
 
 #define SIGNUP "signup"
 #define LOGIN "login"
+#define LOGOUT "logout"
 #define FILMS "films"
 #define FOLLOWERS "followers"
 #define MONEY "money"

@@ -418,37 +418,30 @@ void System::get_films()
 	}
 }
 
-void System::print_recomend(int id)
+void System::print_recomend(int _id)
 {
-	/*Film* printed;
-	vector<double> copy_rates = rates;
-	vector<int> num = number;
-	copy_rates.erase(copy_rates.begin() + id -1);
-	num.erase(num.begin() + id - 1);
+	Film* printed;
+	vector<int> copy_suggestions = suggestions[_id];
+	copy_suggestions.erase(copy_suggestions.begin());
+	vector<int> id;
+	for(int i = 0; i < copy_suggestions.size(); i++)
+		id[i] = i + 1;
 	int number = 0, max, max_index;
 	cout<<"Recommendation Film"<<endl;
 	cout<<"#. Film Id | Film Name | Film Length | Film Director"<<endl;
-	while(number < 4 && copy_rates.size() != 0)
+	while(number < 4 && copy_suggestions.size() != 0)
 	{
-		max_index = max_element(copy_rates.begin(), copy_rates.end()) - copy_rates.begin();;
-		printed = search_film(num[max_index]);
-		try
+		max_index = max_element(copy_suggestions.begin(), copy_suggestions.end()) - copy_suggestions.begin();;
+		printed = search_film(id[max_index]);
+		if(printed->get_is_visible() && printed->get_publisher_id() != now_user->get_id())
 		{
-			film_exist(printed);
-			if(printed->get_publisher_id() == now_user->get_id())
-				throw Bad_request();
-		}catch(exception&)
-		{
-			copy_rates.erase(copy_rates.begin() + max_index);
-			num.erase(num.begin() + max_index);
-			continue;
+			number++;
+			printed->print(number);
 		}
-		copy_rates.erase(copy_rates.begin() + max_index);
-		num.erase(num.begin() + max_index);
-		number++;
-		printed->print(number);
+		copy_suggestions.erase(copy_suggestions.begin() + max_index);
+		id.erase(id.begin() + max_index);
 	}
-*/}
+}
 
 void System::published()
 {

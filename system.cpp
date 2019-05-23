@@ -7,6 +7,8 @@ System::System()
 	now_user = NULL;
 	vector<int> empty = {0};
 	suggestions.push_back(empty);	
+	Person* admin = new Person(ADMIN, 1);
+	users.push_back(admin);
 }
 
 System::~System()

@@ -116,7 +116,8 @@ void System::post_comments()
 	if(now_film == NULL)
 		throw Not_found();
 	int publisher_id;
-	now_user->search_bought_film(now_film->get_id());	
+	if(!now_user->search_bought_film(now_film->get_id()))
+		throw Permission_denied();
 	publisher_id = now_film->catch_comment(input.info[CONTENT], now_user->get_username(), now_user->get_id());
 	string notif = "User ";
 	notif += now_user->get_username();
@@ -138,7 +139,8 @@ void System::rate()
 		throw Bad_request();
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
 	film_exist(now_film);
-	now_user->search_bought_film(now_film->get_id());
+	if(!now_user->search_bought_film(now_film->get_id()))
+		throw Permission_denied();
 	now_film->rating(stoi(input.info[SCORE]), now_user->get_id());
 	Person* publisher = search_user_whith_id(now_film->get_publisher_id());
 	string notif = "User ";
@@ -162,6 +164,11 @@ void System::buy()
 		throw Bad_request();
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
 	film_exist(now_film);
+	if(now_user->search_bought_film(now_film->get_id()))
+	{
+		cout<<OK<<endl;
+		return;
+	}
 	if(now_user->get_money() < now_film->get_price())
 		throw Permission_denied();
 	now_user->update_money((-1) * now_film->get_price());

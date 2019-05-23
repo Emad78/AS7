@@ -4,7 +4,9 @@ System::System()
 {
 	money = 0;
 	users.clear();
-	now_user = NULL;	
+	now_user = NULL;
+	vector<int> empty = {0};
+	suggestions.push_back(empty);	
 }
 
 System::~System()
@@ -153,7 +155,6 @@ void System::rate()
 	notif += to_string(now_film->get_id());
 	notif += ".";
 	publisher->catch_notif(notif);
-	rates[now_film->get_id() - 1] = now_film->_rate();	
 	cout<<OK<<endl;
 }
 
@@ -278,8 +279,7 @@ void System::post_films()
 	films.push_back(new_film);
 	now_user->add_my_film(new_film);
 	now_user->inform_followers();
-	rates.push_back(0);
-	number.push_back(new_film->get_id());
+	add_new_for_suggest();
 	cout<<OK<<endl;
 }
 
@@ -419,7 +419,7 @@ void System::get_films()
 
 void System::print_recomend(int id)
 {
-	Film* printed;
+	/*Film* printed;
 	vector<double> copy_rates = rates;
 	vector<int> num = number;
 	copy_rates.erase(copy_rates.begin() + id -1);
@@ -447,7 +447,7 @@ void System::print_recomend(int id)
 		number++;
 		printed->print(number);
 	}
-}
+*/}
 
 void System::published()
 {
@@ -614,4 +614,12 @@ void System::user_exist()
 {
 	if(now_user == NULL)
 		throw Permission_denied();			
+}
+
+void System::add_new_for_suggest()
+{
+	for(int i = 0; i < suggestions.size(); i++)
+		suggestions[i].push_back(0);
+	vector<int> new_film(suggestions.size() + 1, 0);
+	suggestions.push_back(new_film);
 }

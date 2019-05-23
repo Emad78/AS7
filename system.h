@@ -14,8 +14,7 @@ class System
 {
 private:
 	vector<Film*> films;
-	vector<double> rates;
-	vector<int> number;	
+	vector<vector<int>> suggestions;	
 	vector<Person*> users;
 	int money;
 	Command* command;
@@ -37,6 +36,7 @@ public:
 	void post_films();
 	void put_films();
 	void delete_films();
+	void add_new_for_suggest();
 	void check_user(bool is_publisher);
 	void get_followers();
 	void post_money();

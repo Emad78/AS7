@@ -173,6 +173,7 @@ void System::buy()
 	if(now_user->get_money() < now_film->get_price())
 		throw Permission_denied();
 	now_user->update_money((-1) * now_film->get_price());
+	update_suggestions(now_film->get_id());
 	now_user->add_bought_film(now_film);
 	add_money_for_publisher(now_film);
 	money = now_film->get_price();
@@ -622,4 +623,14 @@ void System::add_new_for_suggest()
 		suggestions[i].push_back(0);
 	vector<int> new_film(suggestions.size() + 1, 0);
 	suggestions.push_back(new_film);
+}
+
+void System::update_suggestions(int film_id)
+{
+	vector<Film*> relations = now_user->get_bought_films();
+	for(int i = 0; i < relations.size(); i++)
+	{
+		suggestions[film_id][relations[i]->get_id()]++;
+		suggestions[relations[i]->get_id()][film_id]++;		
+	}
 }

@@ -37,6 +37,7 @@ public:
 	void put_films();
 	void delete_films();
 	void add_new_for_suggest();
+	void update_suggestions(int film_id);
 	void check_user(bool is_publisher);
 	void get_followers();
 	void post_money();

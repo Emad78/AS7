@@ -28,6 +28,7 @@ void System::run()
 	{
 		try
 		{
+//			cout<<"MONEY = "<<money<<endl;
 			if(line == "")
 				continue;
 			command = new Command(line);
@@ -178,14 +179,14 @@ void System::buy()
 	update_suggestions(now_film->get_id());
 	now_user->add_bought_film(now_film);
 	add_money_for_publisher(now_film);
-	money = now_film->get_price();
+	money += now_film->get_price();
 	cout<<OK<<endl;
 }
 
 void System::add_money_for_publisher(Film* now_film)
 {
 	Person* publisher = search_user_whith_id(now_film->get_publisher_id());
-	double factor = 0;
+	double factor = POOR_FACTOR;
 	int price = now_film->get_price(), rate = now_film->_rate();
 	if(rate < MEDIUM)
 		factor = POOR_FACTOR;
@@ -193,7 +194,7 @@ void System::add_money_for_publisher(Film* now_film)
 		factor = MEDIUM_FACTOR;
 	if(rate >= GOOD)
 		factor = GOOD_FACTOR;
-	publisher->update_money(factor * price);
+	publisher->update_second(factor * price);
 	string notif = "User ";
 	notif += now_user->get_username();
 	notif += " with id ";
@@ -422,13 +423,16 @@ void System::get_films()
 
 void System::print_recomend(int _id)
 {
+	cout<<"**"<<endl;
 	Film* printed;
 	vector<int> copy_suggestions = suggestions[_id];
 	copy_suggestions.erase(copy_suggestions.begin());
+	cout<<"**"<<endl;
 	vector<int> id;
 	for(int i = 0; i < copy_suggestions.size(); i++)
-		id[i] = i + 1;
+		id.push_back(i + 1);
 	int number = 0, max, max_index;
+	cout<<"**"<<endl;
 	cout<<"Recommendation Film"<<endl;
 	cout<<"#. Film Id | Film Name | Film Length | Film Director"<<endl;
 	while(number < 4 && copy_suggestions.size() != 0)

@@ -14,6 +14,13 @@ Person::Person(Input input, int _id)
 	money = 0;
 }
 
+Person::Person(string username, int _id)
+{
+	info.username = username;
+	info.password = username;
+	id = _id;
+}
+
 string Person::get_username()
 {
 	return info.username;

@@ -18,6 +18,7 @@ protected:
 	int money;
 public:
 	Person(Input input, int _id);
+	Person(string username, int id);
 	int get_money();
 	string get_username();
 	int get_id();

@@ -14,6 +14,7 @@ public:
 	Publisher(Input input, int _id);
 	Film* search_my_film(int _id);
 	void print_followers();
+	void update_second(int new_money);
 	int catch_money();
 	void inform_followers();
 	virtual vector<Film*> get_my_films();

@@ -34,6 +34,7 @@ int Publisher::catch_money()
 	int catching = second_money;
 	money += second_money;
 	second_money = 0;
+	cout<<"catching = "<<catching;
 	return catching;
 }
 
@@ -62,4 +63,9 @@ void Publisher::add_follower(Person* follower)
 vector<Film*> Publisher::get_my_films()
 {
 	return my_films;
+}
+
+void Publisher::update_second(int new_money)
+{
+	second_money += new_money / 100;
 }

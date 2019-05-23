@@ -86,10 +86,10 @@ void Person::read(bool notif_status, int limit)
 	}
 }
 
-void Person::search_bought_film(int _id)
+bool Person::search_bought_film(int _id)
 {
 	for(int i = 0; i < bought_films.size(); i++)
 		if(_id == bought_films[i]->get_id())
-			return;
-		throw Permission_denied();
+			return true;
+	return false;
 }

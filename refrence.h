@@ -69,9 +69,9 @@
 #define GOOD 8
 #define MEDIUM 5
 
-#define GOOD_FACTOR 0.95
-#define MEDIUM_FACTOR 0.90
-#define POOR_FACTOR 0.80
+#define GOOD_FACTOR 95
+#define MEDIUM_FACTOR 90
+#define POOR_FACTOR 80
 
 #define _READ true
 #define NOT_READ false

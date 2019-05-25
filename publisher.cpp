@@ -34,7 +34,6 @@ int Publisher::catch_money()
 	int catching = second_money;
 	money += second_money;
 	second_money = 0;
-	cout<<"catching = "<<catching;
 	return catching;
 }
 

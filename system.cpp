@@ -423,16 +423,13 @@ void System::get_films()
 
 void System::print_recomend(int _id)
 {
-	cout<<"**"<<endl;
 	Film* printed;
 	vector<int> copy_suggestions = suggestions[_id];
 	copy_suggestions.erase(copy_suggestions.begin());
-	cout<<"**"<<endl;
 	vector<int> id;
 	for(int i = 0; i < copy_suggestions.size(); i++)
 		id.push_back(i + 1);
 	int number = 0, max, max_index;
-	cout<<"**"<<endl;
 	cout<<"Recommendation Film"<<endl;
 	cout<<"#. Film Id | Film Name | Film Length | Film Director"<<endl;
 	while(number < 4 && copy_suggestions.size() != 0)

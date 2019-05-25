@@ -163,7 +163,7 @@ void Film::print_details()
 	cout<<"Year = "<<year<<endl;
 	cout<<"Summary = "<<summary<<endl;
 	cout<<"Rate = "<<setprecision(2)<<_rate()<<endl;
-	cout<<"Price = "<<price<<endl;
+	cout<<"Price = "<<price<<endl<<endl;
 }
 
 void Film::print_comments()
@@ -172,6 +172,7 @@ void Film::print_comments()
 	for(int i = 0; i < comments.size(); i++)
 		if(comments[i]->get_is_visible() == true)
 			cout<<comments[i];
+	cout<<endl;
 }
 
 void Film::print(int number)

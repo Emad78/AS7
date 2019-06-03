@@ -9,6 +9,7 @@
 #include "bad_request.h"
 #include "not_found.h"
 #include "permission_denied.h"
+#include "server/server.hpp"
 
 class System
 {
@@ -22,7 +23,7 @@ private:
 	Input input;
 public:
 	System();
-	void run();
+	void run(Input& _input);
 	void process();
 	void metod_detect();
 	void post_metod();

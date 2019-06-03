@@ -21,25 +21,11 @@ System::~System()
 	delete now_user;
 }
 
-void System::run()
+void System::run(Input& _input)
 {
-	string line;
-	while(getline(cin, line))
-	{
-		try
-		{
-//			cout<<"MONEY = "<<money<<endl;
-			if(line == "")
-				continue;
-			command = new Command(line);
-			input = command->get_input();
-			process();
-		}catch(exception& ex)
-		{
-			cout<<ex.what()<<endl;
-		}
-		delete command;
-	}
+	input = _input;
+	process();
+	_input = input;	
 }
 
 void System::process()
@@ -58,12 +44,12 @@ Person* System::search_user(string username)
 void System::metod_detect()
 {
 	string metod = input.metod;
-	if(metod == POST)
+	if(metod == POSTT)
 		post_metod();
-	else if(metod == GET)
+	else if(metod == GETT)
 		get_metod();
 	else
-		throw Bad_request();
+		throw Server::Exception("Bad_request");
 }
 
 void System::post_metod()
@@ -96,14 +82,14 @@ void System::post_metod()
 	else if(re == DELETE_COMMENTS)
 		delete_comments();				
 	else
-		throw Not_found();
+		throw Server::Exception("Not found");
 }
 
 void System::put_films()
 {
 	check_user(true);
 	if(search_film(stoi(input.info[FILM_ID])) == NULL)
-		throw Not_found();
+		throw Server::Exception("Not found");
 	Film* now_film = check_film_for_publisher();
 	film_exist(now_film); 
 	now_film->edit(input);
@@ -115,14 +101,14 @@ void System::post_comments()
 {
 	user_exist();
 	if(input.info[FILM_ID] == "" || input.info[CONTENT] == "")
-		throw Bad_request();	
+		throw Server::Exception("Bad_request");	
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
 	film_exist(now_film);
 	if(now_film == NULL)
-		throw Not_found();
+		throw Server::Exception("Not found");
 	int publisher_id;
 	if(!now_user->search_bought_film(now_film->get_id()))
-		throw Permission_denied();
+		throw Server::Exception("Permission denied");
 	publisher_id = now_film->catch_comment(input.info[CONTENT], now_user->get_username(), now_user->get_id());
 	string notif = "User ";
 	notif += now_user->get_username();
@@ -141,11 +127,11 @@ void System::rate()
 {
 	user_exist();
 	if(input.info[FILM_ID] == "" || input.info[SCORE] == "")
-		throw Bad_request();
+		throw Server::Exception("Bad_request");
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
 	film_exist(now_film);
 	if(!now_user->search_bought_film(now_film->get_id()))
-		throw Permission_denied();
+		throw Server::Exception("Permission denied");
 	now_film->rating(stoi(input.info[SCORE]), now_user->get_id());
 	Person* publisher = search_user_whith_id(now_film->get_publisher_id());
 	string notif = "User ";
@@ -165,7 +151,7 @@ void System::buy()
 {
 	user_exist();
 	if(input.info[FILM_ID] == "")
-		throw Bad_request();
+		throw Server::Exception("Bad_request");
 	Film* now_film = search_film(stoi(input.info[FILM_ID]));
 	film_exist(now_film);
 	if(now_user->search_bought_film(now_film->get_id()))
@@ -174,7 +160,7 @@ void System::buy()
 		return;
 	}
 	if(now_user->get_money() < now_film->get_price())
-		throw Permission_denied();
+		throw Server::Exception("Permission denied");
 	now_user->update_money((-1) * now_film->get_price());
 	update_suggestions(now_film->get_id());
 	now_user->add_bought_film(now_film);
@@ -219,9 +205,9 @@ void System::post_followers()
 {
 	user_exist();
 	if(input.info[USER_ID] == "")
-		throw Bad_request();
+		throw Server::Exception("Bad_request");
 	if(!users[stoi(input.info[USER_ID]) - 1]->get_is_publisher() || stoi(input.info[USER_ID]) > users.size())
-		throw Bad_request();
+		throw Server::Exception("Bad_request");
 	users[stoi(input.info[USER_ID]) - 1]->add_follower(now_user);
 	cout<<OK<<endl;
 }
@@ -230,10 +216,10 @@ void System::replies()
 {
 	if(input.info[FILM_ID] == "" || input.info[CONTENT] == ""
 		|| input.info[COMMENT_ID] == "")
-		throw Bad_request();	
+		throw Server::Exception("Bad_request");	
 	check_user(true);
 	if(search_film(stoi(input.info[FILM_ID])) == NULL)
-		throw Not_found();
+		throw Server::Exception("Not found");
 	Film* now_film = check_film_for_publisher();
 	film_exist(now_film);
 	send_reply(now_film); 
@@ -276,7 +262,7 @@ void System::post_films()
 	if(input.info[NAME] == "" || input.info[YEAR] == ""
 		|| input.info[LENGTH] == "" || input.info[PRICE] == ""
 		|| input.info[SUMMARY] == "" || input.info[DIRECTOR] == "")
-		throw Bad_request();
+		throw Server::Exception("Bad_request");
 	check_user(true);
 	Film* new_film;
 	new_film = new Film(input, films.size() + 1, now_user->get_id());
@@ -290,13 +276,13 @@ void System::post_films()
 void System::signup()
 {
 	if(now_user != NULL)
-		throw Bad_request();
+		throw Server::Exception("Bad_request");
 	if(input.info[USERNAME] == "" || input.info[PASSWORD] == ""
 		|| input.info[EMAIL] == "" || input.info[AGE] == "")
-		throw Bad_request();
+		throw Server::Exception("Bad_request");
 	Person* new_user;
 	if(search_user(input.info[USERNAME]) != NULL)
-		throw Bad_request();
+		throw Server::Exception("Bad_request");
 	if(input.info[PUBLISHER] == "true")
 		new_user = new Publisher(input, users.size() + 1);
 	else
@@ -309,25 +295,26 @@ void System::signup()
 void System::login()
 {
 	if(now_user != NULL)
-		throw Bad_request();	
+   		throw Server::Exception("Bad_request");
 	if(input.info[USERNAME] == "" || input.info[PASSWORD] == "")
-		throw Bad_request();
+    	throw Server::Exception("Bad_request");
 	Person* new_user;
 	new_user = search_user(input.info[USERNAME]);
 	if(new_user == NULL)
-		throw Bad_request();
+    	throw Server::Exception("Bad_request");
 	if(new_user->get_password() != input.info[PASSWORD])
 	{
-		throw Bad_request();		
+    	throw Server::Exception("Bad_request");
 	}
-	now_user = new_user;	
+	now_user = new_user;
+	input.info[ID] = to_string(now_user->get_id());	
 	cout<<OK<<endl;
 }
 
 void System::logout()
 {
 	if(now_user == NULL)
-		throw Bad_request();
+		throw Server::Exception("Bad_request");
 	now_user = NULL;
 	cout<<OK<<endl;
 }
@@ -338,10 +325,10 @@ Film* System::check_film_for_publisher()
 	if(now_film == NULL)
 	{
 		delete now_film;
-		throw Permission_denied();
+		throw Server::Exception("Permission denied");
 	}
 	if(now_film->get_is_visible() == false)
-		throw Not_found();
+		throw Server::Exception("Not found");
 	return now_film;	
 }
 
@@ -371,7 +358,7 @@ void System::get_metod()
 	else if(re == MONEY)
 		get_money();
 	else 
-		throw Bad_request();
+		throw Server::Exception("Bad_request");
 }
 
 void System::get_money()
@@ -398,7 +385,7 @@ void System::notifications()
 void System::purchased()
 {
 	if(now_user == NULL)
-		throw Permission_denied();
+		throw Server::Exception("Permission denied");
 		vector<Film*> searched = seaerh_films_by_filters(now_user->get_bought_films());
 		print_films(searched, ALL);	
 }
@@ -572,7 +559,7 @@ void System::delete_comments()
 {
 	check_user(true);
 	if(input.info[FILM_ID] == "" || input.info[COMMENT_ID] == "")
-		throw Bad_request();
+		throw Server::Exception("Bad_request");
 	Film* now_film;
 	now_film = check_film_for_publisher();
 	film_exist(now_film);
@@ -585,10 +572,10 @@ void System::delete_films()
 	check_user(true);
 	Film* deleted_film;
 	if(search_film(stoi(input.info[FILM_ID])) == NULL)
-		throw Not_found();
+		throw Server::Exception("Not found");
 	deleted_film = now_user->search_my_film(stoi(input.info[FILM_ID]));
 	if(deleted_film == NULL)
-		throw Permission_denied();
+		throw Server::Exception("Permission denied");
 	deleted_film->_delete();
 	cout<<OK<<endl;
 }
@@ -597,20 +584,20 @@ void System::check_user(bool is_publisher)
 {
 	user_exist();
 	if(now_user->get_is_publisher() != is_publisher)
-		throw Permission_denied();
+		throw Server::Exception("Permission denied");
 }
 
 bool System::film_exist(Film* film)
 {
 	if(film->get_is_visible() == false)
-		throw Not_found();
+		throw Server::Exception("Not found");
 	return true;
 }
 
 void System::user_exist()
 {
 	if(now_user == NULL)
-		throw Permission_denied();			
+		throw Server::Exception("Permission denied");			
 }
 
 void System::add_new_for_suggest()

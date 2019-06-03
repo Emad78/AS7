@@ -14,6 +14,7 @@
 #define AGE "age"
 #define EMAIL "email"
 #define PUBLISHER "publisher"
+#define ID "id"
 
 #define ADMIN "admin"
 
@@ -41,8 +42,8 @@
 #define LIMIT "limit"
 
 #define PUT "PUT"
-#define POST "POST"
-#define GET "GET"
+#define POSTT "POST"
+#define GETT "GET"
 #define DELETE "DELETE"
 
 #define SIGNUP "signup"

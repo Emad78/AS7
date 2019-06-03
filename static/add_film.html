@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Add new film</title>
+  </head>
+  <body style="background-color: lightblue">
+    <nav  class="navbar navbar-expand-lg navbar-light bg-light " >
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/"> Exit <span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/house">Home<span class="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>    
+    <div style="background-color: blue; padding: 1%; max-width: 300px; border-radius: 3px; margin: auto; ">
+      <form action="/add_film" method="post">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Name</label>
+          <input name="name" type="name" class="form-control" id="exampleFormControlInput1" placeholder="name">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Length</label>
+          <input name="length" type="Length" class="form-control" id="exampleFormControlInput2" placeholder="Length">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Price</label>
+          <input name="price" type="price" class="form-control" id="exampleFormControlInput3" placeholder="price">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Score</label>
+          <input name="score" type="score" class="form-control" id="exampleFormControlInput4" placeholder="score">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Year</label>
+          <input name="year" type="year" class="form-control" id="exampleFormControlInput5" placeholder="score">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Director</label>
+          <input name="director" type="director" class="form-control" id="exampleFormControlInput6" placeholder="score">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlTextarea1">Summary</label>
+          <textarea name="summary" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div>
+          <button type="submit" class="btn btn-primary">Signup</button>
+        </div>   
+      </form>
+    </div>
+  </body>
+</html>

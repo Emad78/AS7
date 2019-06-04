@@ -22,6 +22,8 @@ Film::Film(Input input, int _id, int _publisher_id)
 	rate.user_id.clear();	
 	is_visible = true;
 	publisher_id = _publisher_id;
+	rate.score.push_back(stoi(input.info[SCORE]));
+	rate.user_id.push_back(_publisher_id);
 }
 
 void Film::edit(Input input)
@@ -90,9 +92,9 @@ double Film::_rate()
 
 ostream& operator<<(ostream& out, Film* film)
 {
-	out<<film->id<<" | "<<film->name<<" | "<<film->length<<" | ";
-	out<<film->price<<" | "<<setprecision(2)<<film->_rate()<<" | ";
-	out<<film->year<<" | "<<film->director;
+	out<<"id: "<<film->id<<" | "<<"name: "<<film->name<<" | "<<"length: "<<film->length<<" | ";
+	out<<"price: "<<film->price<<" | "<<setprecision(2)<<film->_rate()<<" | ";
+	out<<"year: "<<film->year<<" | "<<"director: "<<film->director;
 	return out;
 }
 

@@ -18,7 +18,7 @@
         </ul>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <form class="nav-link" action="/profile" method="get">
+            <form class="nav-link" action="/profile" method="post">
               <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Profile</button>  
             </form>
           </li>
@@ -58,7 +58,7 @@
       context.erase(it);
       for( it = context.begin(); it != context.end(); it++)
       {
-         if(it->first == "100")
+         if(it->first == "999")
           {
             it++;
             break;
@@ -72,6 +72,10 @@
       </p>
       <form class="form-inline my-2 my-lg-0" action="/house" method="get">
         <%cout<<"<"<<"button "<<"type="<<'"'<<"submit"<<'"'<<" name="<<'"'<<"film_id"<<'"'<<" value="<<'"'<<it->first<<'"'<<" "<<"class="<<'"'<<"btn btn-danger"<<'"'<<">"<<"Delete"<<"<"<<"/"<<"button"<<">";%>
+      </form>
+      <br>
+      <form class="form-inline my-2 my-lg-0" action="/film_details" method="get">
+        <%cout<<"<"<<"button "<<"type="<<'"'<<"submit"<<'"'<<" name="<<'"'<<"film_id"<<'"'<<" value="<<'"'<<it->first<<'"'<<" "<<"class="<<'"'<<"btn btn-info"<<'"'<<">"<<"Details"<<"<"<<"/"<<"button"<<">";%>
       </form>
     </div>    
     <%
@@ -90,10 +94,10 @@
         cout<<it->second;
       %>
       </p>
-<!--       <form class="form-inline my-2 my-lg-0" action="/house" method="get">
-      <%cout<<"<"<<"button "<<"type="<<'"'<<"submit"<<'"'<<" name="<<'"'<<"film_id"<<'"'<<" value="<<'"'<<it->first<<'"'<<" "<<"class="<<'"'<<"btn btn-danger"<<'"'<<">"<<"Delete"<<"<"<<"/"<<"button"<<">";%>
-    </form>
-     -->    </div>    
+      <form class="form-inline my-2 my-lg-0" action="/film_details" method="get">
+        <%cout<<"<"<<"button "<<"type="<<'"'<<"submit"<<'"'<<" name="<<'"'<<"film_id"<<'"'<<" value="<<'"'<<it->first.substr(2,it->first[1] - '0')<<'"'<<" "<<"class="<<'"'<<"btn btn-info"<<'"'<<">"<<"Details"<<"<"<<"/"<<"button"<<">";%>
+      </form>
+   </div>    
     <%
       }
     %>

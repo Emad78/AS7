@@ -8,6 +8,7 @@
 #include "../refrence.h"
 #include "../system.h"
 
+
 class LoginHandler : public RequestHandler {
 private:
 	System* system;
@@ -16,27 +17,40 @@ public:
 	Response *callback(Request *);
 };
 
-class MapHandler : public RequestHandler {
+class SignupHandler : public RequestHandler {
+private:
+	System* system;
 public:
-  Response *callback(Request *);
+	SignupHandler(System* _system);
+	Response *callback(Request *);
 };
 
-class SignupHandler : public RequestHandler {
+class HousetHandler : public TemplateHandler {
+private:
+	System* system;	
 public:
-  Response *callback(Request *);
+  HousetHandler(System* _system, std::string filePath);
+  std::map<std::string, std::string> handle(Request *req);
 };
+
 
 class AddfilmHandler : public RequestHandler {
+private:
+	System* system;
 public:
-  Response *callback(Request *);
+	AddfilmHandler(System* _system);
+	Response *callback(Request *);
 };
 
 class ProfileHandler : public RequestHandler {
+private:
+	System* system;
 public:
-  Response *callback(Request *);
+	ProfileHandler(System* _system);
+	Response *callback(Request *);
 };
 
-class HouseHandler : public TemplateHandler {
+class HouseHandler : public RequestHandler {
 public:
   Response *callback(Request *);
 };

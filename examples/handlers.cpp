@@ -1,15 +1,7 @@
 #include "handlers.hpp"
-//#include "set_input.h"
+#include "set_input.h"
 
 using namespace std;
-
-void set_login_input(Input&  input, Request *req)
-{
-  input.metod = POST;
-  input.request = LOGIN;
-  input.info[USERNAME] = req->getBodyParam(USERNAME);
-  input.info[PASSWORD] = req->getBodyParam(PASSWORD);
-}
 
 LoginHandler::LoginHandler(System* _system)
 :system(_system)
@@ -19,26 +11,64 @@ Response *LoginHandler::callback(Request *req) {
   Input input;
   set_login_input(input, req);
   system->run(input);
-  cout<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl<<endl;
-  Response *res = Response::redirect("/house");
-//  res->setSessionId("");//////////////////////
+  Response *res = Response::redirect("/house?publisher="+input.info[PUBLISHER]);
+  res->setSessionId(input.info[ID]);
   return res;
 }
+
+SignupHandler::SignupHandler(System* _system)
+:system(_system)
+{}
 
 Response *SignupHandler::callback(Request *req) {
-  Response *res = Response::redirect("/house");
+  Input input;
+  set_signup_input(input, req);
+  system->run(input);
+  Response *res = Response::redirect("/house?publisher="+input.info[PUBLISHER]);
+  res->setSessionId(input.info[ID]);
   return res;
 }
+
+HousetHandler::HousetHandler(System* _system, string filePath) :system(_system), TemplateHandler(filePath) {}
+
+map<string, string> HousetHandler::handle(Request *req) {
+  map<string, string> context;
+  Input input;
+  set_myfilm_input(input, req);
+//  if(req->getQueryParam(PUBLISHER) != "")
+    system->run(input);
+  context = input.info;
+  req->setQueryParam(PUBLISHER, system->is_publisher(req->getSessionId()));
+  context[PUBLISHER] = req->getQueryParam(PUBLISHER);
+  return context;
+}
+
+AddfilmHandler::AddfilmHandler(System* _system)
+:system(_system)
+{}
 
 Response *AddfilmHandler::callback(Request *req) {
-  Response *res = Response::redirect("/add_film");
+  Input input;
+  set_addfilm_input(input, req);
+  input.info[ID] = req->getSessionId();
+  system->run(input);
+  Response *res = Response::redirect("/add_film?publisher=" + system->is_publisher(req->getSessionId()));
   return res;
 }
 
+ProfileHandler::ProfileHandler(System* _system)
+:system(_system)
+{}
+
 Response *ProfileHandler::callback(Request *req) {
-  Response *res = Response::redirect("/profile");
+  Input input;
+  set_price_input(input, req);
+  input.info[ID] = req->getSessionId();
+  system->run(input);
+  Response *res = Response::redirect("/profile?publisher=" + system->is_publisher(req->getSessionId()));
   return res;
 }
+
 
 Response *HouseHandler::callback(Request *req) {
   Response *res = Response::redirect("/house");

@@ -34,9 +34,17 @@ HousetHandler::HousetHandler(System* _system, string filePath) :system(_system),
 map<string, string> HousetHandler::handle(Request *req) {
   map<string, string> context;
   Input input;
+  if( req->getQueryParam(FILM_ID ) != "")
+  {
+    set_myfilm_delete_input(input, req);
+    system->run(input);    
+  }
   set_myfilm_input(input, req);
-//  if(req->getQueryParam(PUBLISHER) != "")
-    system->run(input);
+  system->run(input);
+  input.info["100"] = "";
+  system->show_films(input); 
+  for(auto it = input.info.begin(); it != input.info.end(); it++)
+    cout<<it->first<<endl;     
   context = input.info;
   req->setQueryParam(PUBLISHER, system->is_publisher(req->getSessionId()));
   context[PUBLISHER] = req->getQueryParam(PUBLISHER);

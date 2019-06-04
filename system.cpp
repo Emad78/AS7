@@ -21,6 +21,24 @@ System::~System()
 	delete now_user;
 }
 
+void System::show_films(Input& _input)
+{
+	input = _input;
+	vector<Film*> printed = films;
+	stringstream film;
+	cout<<"size: "<<printed.size()<<endl;
+	cout<<"money: "<<now_user->get_money()<<endl;
+	for(int i = 0; i < printed.size(); i++)
+	{
+		if(!printed[i]->get_is_visible() || printed[i]->get_price() > now_user->get_money())
+			continue;
+		film<<printed[i]<<endl;
+		input.info["a" + to_string(printed[i]->get_id())] = film.str();
+		film.str("");
+	}
+	_input = input;
+}
+
 string System::is_publisher(string id)
 {
 	if(users[stoi(id)]->get_is_publisher())
@@ -31,9 +49,9 @@ string System::is_publisher(string id)
 void System::run(Input& _input)
 {
 	input = _input;
-	if(input.info[ID] != "")
+/*	if(input.info[ID] != "")
 		now_user = users[stoi(input.info[ID])];
-	process();
+*/	process();
 	_input = input;	
 }
 
@@ -398,8 +416,8 @@ void System::purchased()
 {
 	if(now_user == NULL)
 		throw Server::Exception("Permission denied");
-		vector<Film*> searched = seaerh_films_by_filters(now_user->get_bought_films());
-		print_films(searched, ALL);	
+	vector<Film*> searched = seaerh_films_by_filters(now_user->get_bought_films());
+	print_films(searched, ALL);	
 }
 
 void System::get_films()
@@ -475,7 +493,6 @@ void System::print_films(vector<Film*> printed, int status)
 		film.str("");
 		number++;
 	}
-
 }
 
 vector<Film*> System::seaerh_films_by_filters(vector<Film*> source)

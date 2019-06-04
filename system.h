@@ -24,6 +24,7 @@ private:
 public:
 	System();
 	string is_publisher(string id);
+	void show_films(Input& _input);
 	void run(Input& _input);
 	void process();
 	void metod_detect();

@@ -24,7 +24,7 @@ int main(int argc, char **argv) {
     server.get("/film_details", new ShowPage("static/film_details.html"));        
     server.post("/afilm_details", new FilmdetailsHandler());
     server.get("/profile", new ShowPage("static/profile.html"));            
-    server.post("/profile", new ProfileHandler(&system));    
+    server.post("/profile", new ProfileHandler(&system, "static/profile.html"));    
     server.get("/home.png", new ShowImage("static/home.png"));
     server.get("/", new ShowPage("static/home.html"));
     server.run();

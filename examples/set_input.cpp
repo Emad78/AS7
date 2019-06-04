@@ -56,3 +56,10 @@ void set_myfilm_input(Input&  input, Request *req)
 	if(req->getQueryParam(DIRECTOR) != "")
 		input.info[DIRECTOR] = req->getQueryParam(DIRECTOR);
 }
+
+void set_bought_film_input(Input&  input, Request *req)
+{
+	input.metod = GETT;
+	input.request = PURCHASED;
+}
+

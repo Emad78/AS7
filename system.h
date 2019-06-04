@@ -23,6 +23,7 @@ private:
 	Input input;
 public:
 	System();
+	string is_publisher(string id);
 	void run(Input& _input);
 	void process();
 	void metod_detect();

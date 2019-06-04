@@ -7,7 +7,7 @@ System::System()
 	now_user = NULL;
 	vector<int> empty = {0};
 	suggestions.push_back(empty);	
-	Person* admin = new Person(ADMIN, 1);
+	Person* admin = new Person(ADMIN, 0);
 	users.push_back(admin);
 }
 
@@ -21,9 +21,18 @@ System::~System()
 	delete now_user;
 }
 
+string System::is_publisher(string id)
+{
+	if(users[stoi(id)]->get_is_publisher())
+		return "true";
+	return "";
+}
+
 void System::run(Input& _input)
 {
 	input = _input;
+	if(input.info[ID] != "")
+		now_user = users[stoi(input.info[ID])];
 	process();
 	_input = input;	
 }
@@ -275,27 +284,28 @@ void System::post_films()
 
 void System::signup()
 {
-	if(now_user != NULL)
-		throw Server::Exception("Bad_request");
+	cout<<"##"<<endl;
 	if(input.info[USERNAME] == "" || input.info[PASSWORD] == ""
 		|| input.info[EMAIL] == "" || input.info[AGE] == "")
 		throw Server::Exception("Bad_request");
+	cout<<"##"<<endl;
 	Person* new_user;
 	if(search_user(input.info[USERNAME]) != NULL)
 		throw Server::Exception("Bad_request");
+	cout<<"##"<<endl;
 	if(input.info[PUBLISHER] == "true")
-		new_user = new Publisher(input, users.size() + 1);
+		new_user = new Publisher(input, users.size());
 	else
-		new_user = new Person(input, users.size() + 1);
+		new_user = new Person(input, users.size());
+	cout<<"##"<<endl;
 	users.push_back(new_user);
 	now_user = new_user;
+	input.info[ID] = to_string(now_user->get_id());
 	cout<<OK<<endl;
 }
 
 void System::login()
 {
-	if(now_user != NULL)
-   		throw Server::Exception("Bad_request");
 	if(input.info[USERNAME] == "" || input.info[PASSWORD] == "")
     	throw Server::Exception("Bad_request");
 	Person* new_user;
@@ -307,7 +317,9 @@ void System::login()
     	throw Server::Exception("Bad_request");
 	}
 	now_user = new_user;
-	input.info[ID] = to_string(now_user->get_id());	
+	input.info[ID] = to_string(now_user->get_id());
+	if(now_user->get_is_publisher())
+		input.info[PUBLISHER] = "true";
 	cout<<OK<<endl;
 }
 
@@ -435,7 +447,12 @@ void System::print_recomend(int _id)
 
 void System::published()
 {
-	check_user(true);
+	user_exist();
+	if(!now_user->get_is_publisher())
+	{
+		input.info.clear();
+		return;
+	}
 	vector<Film*> my_films = seaerh_films_by_filters(now_user->get_my_films());
 	print_films(my_films, EXISTED);
 }
@@ -446,12 +463,16 @@ void System::print_films(vector<Film*> printed, int status)
 	cout<<"Film Length"<<" | "<<"Film price"<<" | ";
 	cout<<"Rate"<<" | "<<"Production Year"<<" | ";
 	cout<<"Film Director"<<endl;
+	stringstream film;
 	int number = 1;
+	input.info.clear();	
 	for(int i = 0; i < printed.size(); i++)
 	{
 		if(status  == EXISTED && !printed[i]->get_is_visible())
 			continue;
-		cout<<to_string(number)<<". "<<printed[i]<<endl;
+		film<<printed[i]<<endl;
+		input.info[to_string(printed[i]->get_id())] = film.str();
+		film.str("");
 		number++;
 	}
 
@@ -569,6 +590,7 @@ void System::delete_comments()
 
 void System::delete_films()
 {
+	cout<<"##"<<endl;
 	check_user(true);
 	Film* deleted_film;
 	if(search_film(stoi(input.info[FILM_ID])) == NULL)
@@ -577,6 +599,7 @@ void System::delete_films()
 	if(deleted_film == NULL)
 		throw Server::Exception("Permission denied");
 	deleted_film->_delete();
+	input.info.clear();
 	cout<<OK<<endl;
 }
 

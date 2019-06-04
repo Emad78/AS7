@@ -36,5 +36,24 @@
         <button type="submit" class="btn btn-success">Charge</button>
       </form>
     </div>
+    <%
+      for(auto it = context.begin(); it != context.end(); it++)
+      {
+         if(it->first == "999")
+          {
+            it++;
+            break;
+          }
+    %>          
+    <div class="jumbotron">
+      <p>
+      <% 
+        cout<<it->second;
+      %>
+      </p>
+    </div>    
+    <%
+      }
+    %>
   </body>
 </html>

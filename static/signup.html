@@ -3,7 +3,7 @@
   <body style="text-align: center;">
     <h1>NETFILIX</h1>
     <div style="background-color: lightblue; padding: 1%; max-width: 300px; border-radius: 3px; margin: auto; ">
-      <form action="/signup" method="POST">
+      <form action="/signup" method="post">
         <div class="form-group">
           <label for="exampleInputUsername1">Username</label>
           <input name="username" type="username" class="form-control" id="exampleInputUsername" aria-describedby="usernameHelp" placeholder="Username">
@@ -26,8 +26,10 @@
           <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
         <div class="form-group form-check">
-          <input name="publisher" type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">I'm publisher</label>
+          <select name="publisher" class="form-control" id="exampleFormControlSelect1">
+            <option>Publisher</option>
+            <option>Costumer</option>
+          </select>
         </div>
           <button type="submit" class="btn btn-primary">Signup</button>
         </div>

@@ -24,16 +24,21 @@ System::~System()
 void System::show_films(Input& _input)
 {
 	input = _input;
+	_input.info.clear();
 	vector<Film*> printed = films;
 	stringstream film;
 	cout<<"size: "<<printed.size()<<endl;
 	cout<<"money: "<<now_user->get_money()<<endl;
+	string one = "1", two = "2";
 	for(int i = 0; i < printed.size(); i++)
 	{
 		if(!printed[i]->get_is_visible() || printed[i]->get_price() > now_user->get_money())
 			continue;
 		film<<printed[i]<<endl;
-		input.info["a" + to_string(printed[i]->get_id())] = film.str();
+		if(printed[i]->get_id() > 9)
+			input.info["a" + two + to_string(printed[i]->get_id())] = film.str();
+		else
+			input.info["a" + one + to_string(printed[i]->get_id())] = film.str();			
 		film.str("");
 	}
 	_input = input;
@@ -49,6 +54,11 @@ string System::is_publisher(string id)
 void System::run(Input& _input)
 {
 	input = _input;
+	_input.info.clear();
+	cout<<"#####"<<endl;
+	 for(auto it = _input.info.begin(); it != _input.info.end(); it++)
+    	cout<<it->first<<endl;     
+
 /*	if(input.info[ID] != "")
 		now_user = users[stoi(input.info[ID])];
 */	process();

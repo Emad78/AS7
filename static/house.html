@@ -58,6 +58,11 @@
       context.erase(it);
       for( it = context.begin(); it != context.end(); it++)
       {
+         if(it->first == "100")
+          {
+            it++;
+            break;
+          }
     %>          
     <div class="jumbotron">
       <p>
@@ -71,6 +76,27 @@
     </div>    
     <%
       }
-    %>  
+    %>
+    <form class="form-inline my-2 my-lg-0" action="/house" method="POST">
+      <button button type="submit" class="btn btn-primary btn-lg btn-block">For Purchase</button>
+    </form>  
+    <%
+      for(; it != context.end(); it++)
+      {
+    %>          
+    <div class="jumbotron">
+      <p>
+      <% 
+        cout<<it->second;
+      %>
+      </p>
+<!--       <form class="form-inline my-2 my-lg-0" action="/house" method="get">
+      <%cout<<"<"<<"button "<<"type="<<'"'<<"submit"<<'"'<<" name="<<'"'<<"film_id"<<'"'<<" value="<<'"'<<it->first<<'"'<<" "<<"class="<<'"'<<"btn btn-danger"<<'"'<<">"<<"Delete"<<"<"<<"/"<<"button"<<">";%>
+    </form>
+     -->    </div>    
+    <%
+      }
+    %>
+
   </body>
 </html>

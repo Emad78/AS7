@@ -39,7 +39,14 @@ void set_price_input(Input&  input, Request *req)
 {
 	input.metod = POSTT;
 	input.request = MONEY;
-	input.info[PRICE] = req->getBodyParam(PRICE);
+	input.info[AMOUNT] = req->getBodyParam(PRICE);
+}	
+
+void set_myfilm_delete_input(Input&  input, Request *req)
+{
+	input.metod = POSTT;
+	input.request = DELETE_FILMS;
+	input.info[FILM_ID] = req->getQueryParam(FILM_ID);				
 }	
 
 void set_myfilm_input(Input&  input, Request *req)
@@ -48,10 +55,4 @@ void set_myfilm_input(Input&  input, Request *req)
 	input.request = PUBLISHED;
 	if(req->getQueryParam(DIRECTOR) != "")
 		input.info[DIRECTOR] = req->getQueryParam(DIRECTOR);
-	if(req->getQueryParam(FILM_ID) != "")
-	{
-		input.metod = POSTT;
-		input.request = DELETE_FILMS;
-		input.info[FILM_ID] = req->getQueryParam(FILM_ID);				
-	}
-}	
+}

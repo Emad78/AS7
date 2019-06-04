@@ -42,12 +42,12 @@ public:
 	Response *callback(Request *);
 };
 
-class ProfileHandler : public RequestHandler {
+class ProfileHandler : public TemplateHandler {
 private:
-	System* system;
+	System* system;	
 public:
-	ProfileHandler(System* _system);
-	Response *callback(Request *);
+  ProfileHandler(System* _system, std::string filePath);
+  std::map<std::string, std::string> handle(Request *req);
 };
 
 class HouseHandler : public RequestHandler {

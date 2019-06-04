@@ -41,7 +41,7 @@ map<string, string> HousetHandler::handle(Request *req) {
   }
   set_myfilm_input(input, req);
   system->run(input);
-  input.info["100"] = "";
+  input.info.insert({"999",""});
   system->show_films(input); 
   for(auto it = input.info.begin(); it != input.info.end(); it++)
     cout<<it->first<<endl;     
@@ -64,17 +64,24 @@ Response *AddfilmHandler::callback(Request *req) {
   return res;
 }
 
-ProfileHandler::ProfileHandler(System* _system)
-:system(_system)
-{}
+ProfileHandler::ProfileHandler(System* _system, string filePath) :system(_system), TemplateHandler(filePath) {}
 
-Response *ProfileHandler::callback(Request *req) {
+map<string, string> ProfileHandler::handle(Request *req) 
+{
+  map<string, string> context;
+  if(req->getBodyParam(PRICE) != "")
+    {
+      Input input;
+      set_price_input(input, req);
+      system->run(input);
+    }
   Input input;
-  set_price_input(input, req);
-  input.info[ID] = req->getSessionId();
+  input.info.clear();    
+  set_bought_film_input(input, req);
   system->run(input);
-  Response *res = Response::redirect("/profile?publisher=" + system->is_publisher(req->getSessionId()));
-  return res;
+  input.info.insert({"999",""});
+  context = input.info;
+  return context;
 }
 
 

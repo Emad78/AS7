@@ -11,29 +11,66 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/"> Exit <span class="sr-only">(current)</span></a>
+            <form class="nav-link" action="/" method="get">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Exit</button>  
+            </form>
           </li>
         </ul>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/add_film"> Add new film <span class="sr-only">(current)</span></a>
+            <form class="nav-link" action="/profile" method="get">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Profile</button>  
+            </form>
           </li>
         </ul>
+        <%
+          if(context["publisher"] != "")
+          {
+        %>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/profile"> Profile <span class="sr-only">(current)</span></a>
+            <form class="nav-link" action="/add_film" method="get">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Add new film</button>  
+            </form>
           </li>
         </ul>
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/film_details"> Show films details <span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0" action="/house" method="POST">
+        <form class="form-inline my-2 my-lg-0" action="/house" method="get">
           <input name="director" class="form-control mr-sm-2" type="search" placeholder="Director" aria-label="Search">
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
+        <%
+          }
+        %>
       </div>
     </nav>    
+    <%
+      if(context["publisher"] != "")
+      {
+    %>
+    <form class="form-inline my-2 my-lg-0" action="/house" method="POST">
+      <button button type="submit" class="btn btn-primary btn-lg btn-block">My films</button>
+    </form>  
+    <%
+      }
+    %> 
+    <%
+      auto it = context.find("publisher");
+      context.erase(it);
+      for( it = context.begin(); it != context.end(); it++)
+      {
+    %>          
+    <div class="jumbotron">
+      <p>
+      <% 
+        cout<<it->second;
+      %>
+      </p>
+      <form class="form-inline my-2 my-lg-0" action="/house" method="get">
+        <%cout<<"<"<<"button "<<"type="<<'"'<<"submit"<<'"'<<" name="<<'"'<<"film_id"<<'"'<<" value="<<'"'<<it->first<<'"'<<" "<<"class="<<'"'<<"btn btn-danger"<<'"'<<">"<<"Delete"<<"<"<<"/"<<"button"<<">";%>
+      </form>
+    </div>    
+    <%
+      }
+    %>  
   </body>
 </html>

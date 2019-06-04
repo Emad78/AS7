@@ -58,7 +58,7 @@ notification.o: notification.cpp notification.h refrence.h bad_request.h not_fou
 	$(CC) $(CF) -c notification.cpp
 
 myserver.out: set_input.o my_server.o main.o handlers.o response.o request.o utilities.o server.o route.o template_parser.o command.o system.o publisher.o person.o film.o coment.o notification.o
-	$(CC) $(CF) -o set_input.o my_server.o handlers.o response.o request.o utilities.o server.o route.o template_parser.o main.o command.o system.o publisher.o person.o film.o coment.o notification.o   -o myserver.out
+	$(CC) $(CF) -o myserver.out set_input.o my_server.o handlers.o response.o request.o utilities.o server.o route.o template_parser.o main.o command.o system.o publisher.o person.o film.o coment.o notification.o
 
 .PHONY: clean
 clean:

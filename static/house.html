@@ -74,7 +74,7 @@
         <%cout<<"<"<<"button "<<"type="<<'"'<<"submit"<<'"'<<" name="<<'"'<<"film_id"<<'"'<<" value="<<'"'<<it->first<<'"'<<" "<<"class="<<'"'<<"btn btn-danger"<<'"'<<">"<<"Delete"<<"<"<<"/"<<"button"<<">";%>
       </form>
       <br>
-      <form class="form-inline my-2 my-lg-0" action="/film_details" method="get">
+      <form class="form-inline my-2 my-lg-0" action="/film_details" method="post">
         <%cout<<"<"<<"button "<<"type="<<'"'<<"submit"<<'"'<<" name="<<'"'<<"film_id"<<'"'<<" value="<<'"'<<it->first<<'"'<<" "<<"class="<<'"'<<"btn btn-info"<<'"'<<">"<<"Details"<<"<"<<"/"<<"button"<<">";%>
       </form>
     </div>    
@@ -94,7 +94,7 @@
         cout<<it->second;
       %>
       </p>
-      <form class="form-inline my-2 my-lg-0" action="/film_details" method="get">
+      <form class="form-inline my-2 my-lg-0" action="/film_details" method="post">
         <%cout<<"<"<<"button "<<"type="<<'"'<<"submit"<<'"'<<" name="<<'"'<<"film_id"<<'"'<<" value="<<'"'<<it->first.substr(2,it->first[1] - '0')<<'"'<<" "<<"class="<<'"'<<"btn btn-info"<<'"'<<">"<<"Details"<<"<"<<"/"<<"button"<<">";%>
       </form>
    </div>    

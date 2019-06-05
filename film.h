@@ -26,6 +26,7 @@ public:
 	int get_year();
 	string get_name();
 	string get_director();
+	string get_summary();
 	bool get_is_visible();
 	int catch_comment(string content, string name, int id);
 	void _delete();

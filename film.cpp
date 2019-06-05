@@ -93,7 +93,7 @@ double Film::_rate()
 ostream& operator<<(ostream& out, Film* film)
 {
 	out<<"id: "<<film->id<<" | "<<"name: "<<film->name<<" | "<<"length: "<<film->length<<" | ";
-	out<<"price: "<<film->price<<" | "<<setprecision(2)<<film->_rate()<<" | ";
+	out<<"price: "<<film->price<<" | "<<"rate: "<<setprecision(2)<<film->_rate()<<" | ";
 	out<<"year: "<<film->year<<" | "<<"director: "<<film->director;
 	return out;
 }
@@ -147,6 +147,11 @@ string Film::get_name()
 string Film::get_director()
 {
 	return director;
+}
+
+string Film::get_summary()
+{
+	return summary;
 }
 
 int Film::catch_comment(string content, string name, int id)

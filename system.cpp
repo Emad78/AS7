@@ -312,10 +312,12 @@ void System::post_films()
 
 void System::signup()
 {
-	cout<<"##"<<endl;
+	cout<<"pas: "<<input.info[PASSWORD]<<endl<<"repas: "<<input.info[REPASSWORD];
 	if(input.info[USERNAME] == "" || input.info[PASSWORD] == ""
 		|| input.info[EMAIL] == "" || input.info[AGE] == "")
 		throw Server::Exception("Bad_request");
+	if(input.info[PASSWORD] != input.info[REPASSWORD])
+		throw Server::Exception("Bad_request");		
 	cout<<"##"<<endl;
 	Person* new_user;
 	if(search_user(input.info[USERNAME]) != NULL)

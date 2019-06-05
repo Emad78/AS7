@@ -11,6 +11,7 @@
 
 #define USERNAME "username"
 #define PASSWORD "password"
+#define REPASSWORD "repassword"
 #define AGE "age"
 #define EMAIL "email"
 #define PUBLISHER "publisher"

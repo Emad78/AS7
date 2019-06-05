@@ -79,7 +79,13 @@ void set_buy_input(Input&  input, Request *req)
 	input.info[FILM_ID] = req->getBodyParam("_film_id");
 }
 
-
+void set_score_input(Input&  input, Request *req)
+{
+	input.metod = POSTT;
+	input.request = RATE;
+	input.info[FILM_ID] = req->getBodyParam(FILM_ID);
+	input.info[SCORE] = req->getBodyParam(SCORE);	
+}
 
 
 

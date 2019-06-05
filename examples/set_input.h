@@ -13,5 +13,6 @@ void set_myfilm_delete_input(Input&  input, Request *req);
 void set_bought_film_input(Input&  input, Request *req);
 void set_details_input(Input&  input, Request *req);
 void set_buy_input(Input&  input, Request *req);
+void set_score_input(Input&  input, Request *req);
 
 #endif

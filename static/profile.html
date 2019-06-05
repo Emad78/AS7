@@ -51,6 +51,14 @@
         cout<<it->second;
       %>
       </p>
+      <div style="background-color: blue; padding: 1%; max-width: 300px; border-radius: 1px; ">
+        <form action="/profile" method="post">
+          <div class="input-group mb-3">
+            <input name="score" class="form-control" id="exampleFormControlInput6" placeholder="score">
+          </div>
+          <%cout<<"<"<<"button "<<"type="<<'"'<<"submit"<<'"'<<" name="<<'"'<<"film_id"<<'"'<<" value="<<'"'<<it->first<<'"'<<" "<<"class="<<'"'<<"btn btn-info"<<'"'<<">"<<"Submit"<<"<"<<"/"<<"button"<<">";%>
+        </form>
+      </div>
     </div>    
     <%
       }

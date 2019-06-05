@@ -11,12 +11,16 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/"> Exit <span class="sr-only">(current)</span></a>
+            <form class="nav-link" action="/" method="get">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Exit</button>  
+            </form>
           </li>
         </ul>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/house"> Home <span class="sr-only">(current)</span></a>
+            <form class="nav-link" action="/house" method="get">
+              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Home</button>  
+            </form>
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="/house" method="POST">
@@ -24,6 +28,45 @@
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
-    </nav> 
-
+    </nav>
+    <%
+      auto it = context.begin();
+    %>
+    <div class="jumbotron">
+      <p>
+      <% 
+        cout<<it->second;
+//        it++;
+      %>
+      </p>
+      <%
+        if(it->first[0] == 'Y')
+        {
+      %>
+      <form class="form-inline my-2 my-lg-0" action="/film_details" method="post">
+        <%cout<<"<"<<"button "<<"type="<<'"'<<"submit"<<'"'<<" name="<<'"'<<"_film_id"<<'"'<<" value="<<'"'<<it->first.substr(1,it->first.size() -1) <<'"'<<" "<<"class="<<'"'<<"btn btn-success"<<'"'<<">"<<"Buy"<<"<"<<"/"<<"button"<<">";%>
+      </form>
+      <%
+        }
+      %>
+    </div>
+      <button button type="submit" class="btn btn-primary btn-lg btn-block">For purchase</button>    
+    <%
+      for(it = (++it); it != context.end(); it++)
+      {
+    %>
+    <div class="jumbotron">
+      <p>
+      <% 
+        cout<<it->second;
+      %>
+      </p>
+      <form class="form-inline my-2 my-lg-0" action="/film_details" method="post">
+        <%cout<<"<"<<"button "<<"type="<<'"'<<"submit"<<'"'<<" name="<<'"'<<"film_id"<<'"'<<" value="<<'"'<<it->first.substr(2,it->first[1] - '0')<<'"'<<" "<<"class="<<'"'<<"btn btn-info"<<'"'<<">"<<"details"<<"<"<<"/"<<"button"<<">";%>
+      </form>
+    </div>    
+    <%
+      }
+    %>
+  </body>
 </html>

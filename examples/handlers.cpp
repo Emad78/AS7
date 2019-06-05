@@ -75,6 +75,12 @@ map<string, string> ProfileHandler::handle(Request *req)
       set_price_input(input, req);
       system->run(input);
     }
+  else if(req->getBodyParam(SCORE) != "")
+  {
+      Input input;
+      set_score_input(input, req);
+      system->run(input);
+  }
   Input input;
   input.info.clear();    
   set_bought_film_input(input, req);

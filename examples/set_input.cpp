@@ -14,6 +14,7 @@ void set_signup_input(Input&  input, Request *req)
 	input.request = SIGNUP;
 	input.info[USERNAME] = req->getBodyParam(USERNAME);
 	input.info[PASSWORD] = req->getBodyParam(PASSWORD);
+	input.info[REPASSWORD] = req->getBodyParam(REPASSWORD);
 	input.info[EMAIL] = req->getBodyParam(EMAIL);
 	input.info[AGE] = req->getBodyParam(AGE);
 	if(req->getBodyParam(PUBLISHER) == "Publisher")
@@ -55,6 +56,10 @@ void set_myfilm_input(Input&  input, Request *req)
 	input.request = PUBLISHED;
 	if(req->getQueryParam(DIRECTOR) != "")
 		input.info[DIRECTOR] = req->getQueryParam(DIRECTOR);
+	if(req->getQueryParam(PRICE) != "")
+		input.info[PRICE] = req->getQueryParam(PRICE);
+	if(req->getQueryParam(NAME) != "")
+		input.info[NAME] = req->getQueryParam(NAME);	
 }
 
 void set_bought_film_input(Input&  input, Request *req)

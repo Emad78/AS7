@@ -24,17 +24,10 @@
           </li>
         </ul>
       </div>
-      <div style="background-color: blue; padding: 1%; max-width: 300px; border-radius: 1px; ">
-        <form action="/profile" method="post">
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text">$</span>
-            </div>
-            <input name="price" type="price" class="form-control" aria-label="Amount (to the nearest dollar)">
-          </div>
-          <button type="submit" class="btn btn-success">Charge</button>
-        </form>
-      </div>
+      <form class="form-inline my-2 my-lg-0" action="/profile" method="post">
+        <input name="price" class="form-control mr-sm-2" type="search" placeholder="Amount" aria-label="search">
+        <button class="btn btn-primary" type="submit">Charge</button>
+      </form>
     </nav> 
     <button button type="submit" class="btn btn-primary btn-lg btn-block">Purchased films</button>
     <%

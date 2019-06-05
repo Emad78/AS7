@@ -22,7 +22,7 @@ int main(int argc, char **argv) {
     server.get("/add_film", new ShowPage("static/add_film.html"));        
     server.post("/add_film", new AddfilmHandler(&system));
     server.get("/film_details", new ShowPage("static/film_details.html"));        
-    server.post("/afilm_details", new FilmdetailsHandler());
+    server.post("/film_details", new FilmdetailsHandler(&system, "static/film_details.html"));
     server.get("/profile", new ShowPage("static/profile.html"));            
     server.post("/profile", new ProfileHandler(&system, "static/profile.html"));    
     server.get("/home.png", new ShowImage("static/home.png"));

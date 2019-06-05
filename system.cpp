@@ -441,8 +441,16 @@ void System::get_films()
 	else
 	{
 		Film* now_film = search_film(stoi(input.info[FILM_ID]));
+		cout<<"ID:  "<<input.info[FILM_ID]<<endl;
 		film_exist(now_film);
-		now_film->print_details();
+		input.info.clear();
+		stringstream film;
+		film<<now_film<<" Summary: "<<now_film->get_summary();
+		string status;
+		status = "Y";
+		if(now_film->get_price() > now_user->get_money() || now_user->search_bought_film(now_film->get_id()))
+			status	=	"N";
+		input.info[status + to_string(now_film->get_id())] = film.str();
 		now_film->print_comments();
 		print_recomend(now_film->get_id());
 	}
@@ -451,11 +459,14 @@ void System::get_films()
 void System::print_recomend(int _id)
 {
 	Film* printed;
+	string one ="1", two = "2";
 	vector<int> copy_suggestions = suggestions[_id];
 	copy_suggestions.erase(copy_suggestions.begin());
 	vector<int> id;
 	for(int i = 0; i < copy_suggestions.size(); i++)
 		id.push_back(i + 1);
+	copy_suggestions.erase(copy_suggestions.begin() + _id - 1);
+	id.erase(id.begin() + _id - 1);
 	int number = 0, max, max_index;
 	cout<<"Recommendation Film"<<endl;
 	cout<<"#. Film Id | Film Name | Film Length | Film Director"<<endl;
@@ -463,14 +474,22 @@ void System::print_recomend(int _id)
 	{
 		max_index = max_element(copy_suggestions.begin(), copy_suggestions.end()) - copy_suggestions.begin();;
 		printed = search_film(id[max_index]);
-		if(printed->get_is_visible() && printed->get_publisher_id() != now_user->get_id())
+		if(printed->get_is_visible() && printed->get_publisher_id() != now_user->get_id() )
 		{
 			number++;
-			printed->print(number);
+			stringstream film;
+			film<<printed;
+
+			if(printed->get_id() > 9)
+				input.info["a" + two + to_string(printed->get_id())] = film.str();
+			else
+				input.info["a" + one + to_string(printed->get_id())] = film.str();			
+			film.str("");
 		}
 		copy_suggestions.erase(copy_suggestions.begin() + max_index);
 		id.erase(id.begin() + max_index);
 	}
+	cout<<"**********"<<endl;
 }
 
 void System::published()

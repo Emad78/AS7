@@ -8,7 +8,7 @@
   </head>
   <body style="background-color: lightblue";>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
             <form class="nav-link" action="/" method="get">
@@ -36,6 +36,8 @@
         </ul>
         <form class="form-inline my-2 my-lg-0" action="/house" method="get">
           <input name="director" class="form-control mr-sm-2" type="search" placeholder="Director" aria-label="Search">
+          <input name="name" class="form-control mr-sm-2" type="search" placeholder="Name" aria-label="Search">
+          <input name="price" class="form-control mr-sm-2" type="search" placeholder="Price" aria-label="Search">         
           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
         <%
@@ -48,7 +50,7 @@
       {
     %>
     <form class="form-inline my-2 my-lg-0" action="/house" method="POST">
-      <button button type="submit" class="btn btn-primary btn-lg btn-block">My films</button>
+      <button button type="submit" class="btn btn-primary btn-lg btn-block">Published films</button>
     </form>  
     <%
       }

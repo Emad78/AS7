@@ -55,9 +55,12 @@ public:
   Response *callback(Request *);
 };
 
-class FilmdetailsHandler : public RequestHandler {
+class FilmdetailsHandler : public TemplateHandler {
+private:
+	System* system;	
 public:
-  Response *callback(Request *);
+  FilmdetailsHandler(System* _system, std::string filePath);
+  std::map<std::string, std::string> handle(Request *req);
 };
 
 #endif

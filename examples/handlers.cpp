@@ -90,7 +90,22 @@ Response *HouseHandler::callback(Request *req) {
   return res;
 }
 
-Response *FilmdetailsHandler::callback(Request *req) {
-  Response *res = Response::redirect("/film_details");
-  return res;
+FilmdetailsHandler::FilmdetailsHandler(System* _system, string filePath) :system(_system), TemplateHandler(filePath) {}
+
+map<string, string> FilmdetailsHandler::handle(Request *req) {
+  map<string, string> context;
+  Input input;
+  if(req->getBodyParam(FILM_ID) == "")
+  {
+    set_buy_input(input, req);
+    system->run(input);
+  }
+  input.info.clear();
+  set_details_input(input, req);
+  system->run(input);
+  context = input.info;
+  for(auto it = context.begin(); it != context.end(); it++)
+    cout<<it->second<<endl;     
+  req->setQueryParam(PUBLISHER, system->is_publisher(req->getSessionId()));
+  return context;
 }

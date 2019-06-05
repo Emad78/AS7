@@ -63,3 +63,29 @@ void set_bought_film_input(Input&  input, Request *req)
 	input.request = PURCHASED;
 }
 
+void set_details_input(Input&  input, Request *req)
+{
+	input.metod = GETT;
+	input.request = FILMS;
+	input.info[FILM_ID] = req->getBodyParam("_film_id");
+	if(req->getBodyParam(FILM_ID) != "")
+		input.info[FILM_ID] = req->getBodyParam(FILM_ID);
+}
+
+void set_buy_input(Input&  input, Request *req)
+{
+	input.metod = POSTT;
+	input.request = BUY;
+	input.info[FILM_ID] = req->getBodyParam("_film_id");
+}
+
+
+
+
+
+
+
+
+
+
+
